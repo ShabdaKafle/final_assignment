@@ -1,0 +1,108 @@
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
+
+import model.user
+import Backend.dbconnection
+
+
+class Register_Page:
+    def __init__(self, register):
+        self.register = register
+        self.register.title('User registration')
+        self.register.geometry('800x750')
+        self.register.config(bg="light blue")
+
+        self.db= Backend.dbconnection.DBConnect()
+
+        self.fr1 = Frame(self.register, bd=5, relief=RIDGE)
+        self.fr1.place(x=95, y=20, width=600, height=700)
+        quote2 = Label(self.fr1, text="REGISTER HERE", font=("arial 20 bold"), fg="dark green").place(x=10, y=10)
+
+        # creating register
+        self.username = Label(self.fr1, text="Username", font=("cambria 14"), fg="black").place(x=10, y=70)
+        self.uname = Entry(self.fr1, bd=5, relief=GROOVE, width=27, font=("arial 13 bold"))
+        self.uname.place(x=120, y=70)
+
+        self.hostelname = Label(self.fr1, text="Hostel name", font=("cambria 14"), fg="black").place(x=10, y=120)
+        self.hname = Entry(self.fr1, bd=5, relief=GROOVE, width=32, font=("arial 13 bold"))
+        self.hname.place(x=120, y=120)
+
+        self.address = Label(self.fr1, text="Address", font=("cambria"), fg="black").place(x=10, y=170)
+        self.add = Entry(self.fr1, bd=5, relief=GROOVE, width=27, font=("arial 13 bold"))
+        self.add.place(x=105, y=170)
+
+        self.type = Label(self.fr1, text="Hostel Type", font=("cambria"), fg="black").place(x=10, y=220)
+        self.htype = ttk.Combobox(self.fr1, values=("Girls", "Boys"), state='readonly')
+        self.htype.place(x=120, y=225)
+
+        self.con = Label(self.fr1, text="Conatct number", font=("cambria"), fg="black").place(x=10, y=270)
+        self.cont = Entry(self.fr1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
+        self.cont.place(x=160, y=270)
+
+        self.password1 = Label(self.fr1, text="Password", font=("cambria"), fg="black").place(x=10, y=320)
+        self.pw1 = Entry(self.fr1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"), show='*')
+        self.pw1.place(x=110, y=320)
+
+        self.confirm_pass = Label(self.fr1, text="Confirm Password", font=("cambria"), fg="black").place(x=10, y=370)
+        self.conpw = Entry(self.fr1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"), show='*')
+        self.conpw.place(x=180, y=370)
+
+        self.var_chk = IntVar()
+        chk = Checkbutton(self.fr1, text="I agree to the terms and conditions", variable=self.var_chk, onvalue=1, offvalue=0, font=("arial 12 bold")).place(x=100, y=450)
+
+
+        btn_register = Button(self.fr1, text='Register', font=('arial', 15, 'bold'), width=8, bd=5, bg="green", fg="white", relief=RAISED,command=self.add_click, padx=5)
+        btn_register.place(x=140, y=520)
+
+        btn_reset = Button(self.fr1, text='Reset', font=('arial', 15, 'bold'), width=8, bd=5,bg="green",fg="white", relief=RAISED,command=self.reset_click, padx=5)
+        btn_reset.place(x=290, y=520)
+
+
+
+
+    def reset_click(self):
+        self.uname.delete(0, END)
+        self.hname.delete(0, END)
+        self.add.delete(0, END)
+        self.cont.delete(0, END)
+        self.pw1.delete(0, END)
+        self.conpw.delete(0, END)
+        self.uname.insert(0, '')
+        self.hname.insert(0, '')
+        self.add.insert(0, '')
+        self.cont.insert(0, '')
+        self.pw1.insert(0, '')
+        self.conpw.insert(0, '')
+
+    def add_click(self):
+        username = self.uname.get()
+        hostelname = self.hname.get()
+        add = self.add.get()
+        contact = self.cont.get()
+        password = self.pw1.get()
+        con_password = self.conpw.get()
+        hostel_type = self.htype.get()
+
+
+        if username == '' or hostelname == '' or add == '' or contact == '' or password == '' or con_password == '' or hostel_type == '':
+            messagebox.showerror('Error', 'please fill the empty field')
+            return
+
+        u = model.user.User(username, hostelname, add, contact, password, con_password, hostel_type)
+
+
+        query = "insert into user_data(Username,Password,Address,Gender) values(%s,%s,%s,%s)"
+        values=(u.get_username(),u.get_password(),u.get_address(),u.get_gender())
+
+        self.db.insert(query,values)
+
+        messagebox.showinfo('Success', 'User Registration successful')
+        self.register.destroy()
+
+a = Tk()
+Register_Page(a)
+a.mainloop()
+
+
+
