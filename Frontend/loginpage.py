@@ -81,13 +81,6 @@ class Login_Page:
                     messagebox.showinfo("Error", "User not registered !! Register first")
 
 
-
-    def lbl_signup_click(self, ev):
-        tk = Toplevel()
-        Frontend.registerpage.Register_Page(tk)
-
-
-
 '''wn = Tk()
 Login_Page(wn)
 wn.mainloop()'''

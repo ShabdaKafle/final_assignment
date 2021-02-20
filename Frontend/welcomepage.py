@@ -1,26 +1,42 @@
 from tkinter import *
+import Frontend.loginpage
+import Frontend.registerpage
 
 class Welcome:
     def __init__(self, fpage):
         self.fpage = fpage
-        self.fpage.geometry("700x500")
+        self.fpage.title("Main page")
+        self.fpage.geometry("900x500")
+        self.fpage.config(bg="black")
+
+        self.frame1 = Frame(self.fpage, bg= "black")
+        self.frame1.place(x=1, y=1, width=900, height=60)
+        quote1 = Label(self.frame1, text="'Welcome To Hostel Billing System'", font=("arial 20 bold"), fg="blue", bg="black").place(x=200, y=10)
 
 
-        self.frame1 = Frame(self.fpage)
-        self.frame1.place(x=200, y=350, width=350, height=350)
-        #quote1 = Label(self.frame1, text="'YOUR BANKING PROBLEMS, OUR SOLUTIONS!'", fg="blue").place(x=9, y=10)
 
 
-        log1 = Label(self.frame1, text="Are you a new user?", font=("times new roman", 20), fg="blue").place(x=0, y=0)
-        self.signupbtn = Button(self.fpage, text="Sign up", font=("times new roman", 14, "bold"), bd=5, bg="black",fg="white", relief=RAISED).place(x=450, y=240)
+        # making a signin button
+        self.frame2 = Frame(self.fpage, bg ="black")
+        self.frame2.place(x=200, y=150, width=300, height=280)
+
+        reg1 = Label(self.frame2, text="Already registered?", font=("times new roman", 20, "bold"), fg="green", bg="black").place(x=14,y=215)
+        log1 = Label(self.frame2, text="Are you a new User?", font=("times new roman", 20, "bold"), fg="green",bg="black").place(x=3, y=120)
+
+        self.signinbtn = Button(self.fpage, text="Log in", font=("times new roman", 14, "bold"), bd=5, bg="dark red",
+                                fg="white", relief=RAISED, command=self.btn_signin).place(x=453, y=357)
+        self.signupbtn = Button(self.fpage, text="Sign up", font=("times new roman", 14, "bold"), bd=5, bg="dark red",
+                           fg="white", relief=RAISED, command=self.btn_signup).place(x=453, y=260)
 
 
-        '''self.frame2 = Frame(self.fpage)
-        self.frame2.place(x=200, y=350, width=300, height=100)'''
-        reg1 = Label(self.frame1, text="Already registered?", font=("times new roman", 20), fg="blue").place(x=5,y=20)
-        self.signinbtn = Button(self.fpage, text="Log in", font=("times new roman", 14, "bold"), bd=5, bg="black", fg="white", relief=RAISED).place(x=453, y=357)
+    def btn_signin(self):
+        tk = Toplevel()
+        Frontend.loginpage.Login_Page(tk)
 
+    def btn_signup(self):
+        tk = Toplevel()
+        Frontend.registerpage.Register_Page(tk)
 
-ab = Tk()
+'''ab = Tk()
 Welcome(ab)
-ab.mainloop()
+ab.mainloop()'''

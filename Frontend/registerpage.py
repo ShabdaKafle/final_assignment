@@ -4,6 +4,7 @@ from tkinter import messagebox
 
 import model.user
 import Backend.dbconnection
+import Frontend.loginpage
 
 
 class Register_Page:
@@ -89,20 +90,22 @@ class Register_Page:
             messagebox.showerror('Error', 'please fill the empty field')
             return
 
-        u = model.user.User(username, hostelname, add, contact, password, con_password, hostel_type)
+        u = model.user.User(username, hostelname, add, contact, password)
 
 
-        query = "insert into user_data(Username,Password,Address,Gender) values(%s,%s,%s,%s)"
-        values=(u.get_username(),u.get_password(),u.get_address(),u.get_gender())
+        query = "insert into user_data(username,hostelname,address,contact, password) values(%s,%s,%s,%s,%s)"
+        values=(u.get_username(),u.get_hostelname(),u.get_address(),u.get_contact(), u.get_password())
 
         self.db.insert(query,values)
 
         messagebox.showinfo('Success', 'User Registration successful')
         self.register.destroy()
+        tk = Toplevel()
+        Frontend.loginpage.Login_Page(tk)
 
-a = Tk()
+'''a = Tk()
 Register_Page(a)
-a.mainloop()
+a.mainloop()'''
 
 
 

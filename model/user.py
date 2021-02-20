@@ -1,9 +1,10 @@
 class User:
-    def __init__(self, uname, passw, add, gen):
+    def __init__(self, uname,hname,add,cont, passw):
         self.__username = uname
-        self.__password = passw
+        self.__hostelname = hname
         self.__address = add
-        self.__gender = gen
+        self.__contact = cont
+        self.__password = passw
 
 
     def set_username(self,uname):
@@ -11,18 +12,23 @@ class User:
     def get_username(self):
         return self.__username
 
-    def set_password(self,passw):
-        self.__password = passw
-    def get_password(self):
-        return self.__password
+    def set_hostelname(self,hname):
+        self.__hostelname = hname
+    def get_hostelname(self):
+        return self.__hostelname
 
     def set_address(self, add):
         self.__address = add
     def get_address(self):
         return self.__address
 
-    def set_gender(self, gen):
-        self.__gender = gen
-    def get_gender(self):
-        return self.__gender
+    def set_contact(self, cont):
+        self.__contact = cont
+    def get_contact(self):
+        return self.__contact
+
+    def set_password(self,passw):
+        self.__password = passw
+    def get_password(self):
+        return self.__password
 
