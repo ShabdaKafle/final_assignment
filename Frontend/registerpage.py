@@ -87,8 +87,18 @@ class Register_Page:
 
 
         if username == '' or hostelname == '' or add == '' or contact == '' or password == '' or con_password == '' or hostel_type == '':
-            messagebox.showerror('Error', 'please fill the empty field')
+            messagebox.showerror('Error', 'Please fill the empty field')
             return
+
+        if password!= con_password:
+            messagebox.showerror("Error", "Passwords do not match with each other")
+            return
+
+        if self.var_chk.get() == 0:
+            messagebox.showerror("Error", "Please agree to the terms and condtions")
+            return
+
+
 
         u = model.user.User(username, hostelname, add, contact, password)
 

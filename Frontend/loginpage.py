@@ -57,7 +57,7 @@ class Login_Page:
         if uname == '' or passw == '':
             messagebox.showerror('Error', 'Please fill the empty field')
         else:
-            query = "select * from user where Username=%s and Password=%s"
+            query = "select * from user_data where username=%s and password=%s"
             values = (uname, passw)
             rows = self.db.select(query, values)
 
@@ -66,7 +66,7 @@ class Login_Page:
             if len(rows)!=0:
                 for row in rows:
                     data.append(row[1])
-                    data.append(row[2])
+                    data.append(row[5])
                 print(data)
                 if uname == data[0] and passw == data[1]:
                     self.btn_reset_click()
