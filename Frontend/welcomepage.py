@@ -48,6 +48,6 @@ class Welcome:
         tk = Toplevel()
         Frontend.registerpage.Register_Page(tk)
 
-ab = Tk()
+'''ab = Tk()
 Welcome(ab)
-ab.mainloop()
+ab.mainloop()'''
