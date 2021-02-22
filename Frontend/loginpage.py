@@ -12,14 +12,14 @@ class Login_Page:
 
         self.db = Backend.dbconnection.DBConnect()
 
-        self.root.config(bg="dark grey")
+        self.root.config(bg="purple")
 
 
         self.F1 = Frame(self.root, bd=10, relief=RAISED)
         self.F1.place(x=184, y=44, width=400, height=350)
 
 
-        self.title = Label(self.F1, text="Login to your account", font=("times new roman", 25, "bold"), fg="magenta").place(x=14, y=10)
+        self.title = Label(self.F1, text="Login to your account", font=("times new roman", 25, "bold"), fg="steelblue").place(x=14, y=10)
 
 
         self.lbusername = Label(self.F1, text="Username", font=("times new roman", 15, "bold")).place(x=10, y=95)
@@ -30,10 +30,12 @@ class Login_Page:
         self.txpass = Entry(self.F1, bd=5, relief=SUNKEN, width=25, font=("arial 13 bold"), show='*')
         self.txpass.place(x=110, y=170)
 
-        btn_login = Button(self.F1, text="Login",font=('arial',16, 'bold'), bd=3,bg="blue",fg="white", command=self.btn_login_click)
+        btn_login = Button(self.F1, text="Login",font=('arial',16, 'bold'), bd=3,bg="steelblue",fg="white",\
+                           command=self.btn_login_click)
         btn_login.place(x=100, y=250)
 
-        btn_reset = Button(self.F1, text="Reset", font=('arial', 16, 'bold'), bd=3,bg="blue", fg="white", command=self.btn_reset_click)
+        btn_reset = Button(self.F1, text="Reset", font=('arial', 16, 'bold'), bd=3,bg="steelblue",\
+                           fg="white", command=self.btn_reset_click)
         btn_reset.place(x=200, y=250)
 
 

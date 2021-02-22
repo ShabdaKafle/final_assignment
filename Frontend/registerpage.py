@@ -12,13 +12,13 @@ class Register_Page:
         self.register = register
         self.register.title('User registration')
         self.register.geometry('800x750')
-        self.register.config(bg="light blue")
+        self.register.config(bg="purple")
 
         self.db= Backend.dbconnection.DBConnect()
 
         self.fr1 = Frame(self.register, bd=5, relief=RIDGE)
         self.fr1.place(x=95, y=20, width=600, height=700)
-        quote2 = Label(self.fr1, text="REGISTER HERE", font=("arial 20 bold"), fg="dark green").place(x=10, y=10)
+        quote2 = Label(self.fr1, text="REGISTER HERE", font=("arial 20 bold"), fg="steelblue").place(x=10, y=10)
 
         # creating register
         self.username = Label(self.fr1, text="Username", font=("cambria 14"), fg="black").place(x=10, y=70)
@@ -53,10 +53,10 @@ class Register_Page:
         chk = Checkbutton(self.fr1, text="I agree to the terms and conditions", variable=self.var_chk, onvalue=1, offvalue=0, font=("arial 12 bold")).place(x=100, y=450)
 
 
-        btn_register = Button(self.fr1, text='Register', font=('arial', 15, 'bold'), width=8, bd=5, bg="green", fg="white", relief=RAISED,command=self.add_click, padx=5)
+        btn_register = Button(self.fr1, text='Register', font=('arial', 15, 'bold'), width=8, bd=5, bg="steelblue", fg="white", relief=RAISED,command=self.add_click, padx=5)
         btn_register.place(x=140, y=520)
 
-        btn_reset = Button(self.fr1, text='Reset', font=('arial', 15, 'bold'), width=8, bd=5,bg="green",fg="white", relief=RAISED,command=self.reset_click, padx=5)
+        btn_reset = Button(self.fr1, text='Reset', font=('arial', 15, 'bold'), width=8, bd=5,bg="steelblue",fg="white", relief=RAISED,command=self.reset_click, padx=5)
         btn_reset.place(x=290, y=520)
 
 
