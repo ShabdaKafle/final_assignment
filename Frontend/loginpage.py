@@ -73,9 +73,13 @@ class Login_Page:
                 if uname == data[0] and passw == data[1]:
                     self.btn_reset_click()
                     messagebox.showinfo('Success', 'Congratulations!! login successful')
-                    tk = Tk()
-                    Frontend.dashboard.Dashboard(tk)
+                    query="select hostelname from user_data where username=%s"
+                    values=(data[0],)
+                    row=self.db.select(query,values)
                     self.root.destroy()
+                    tk = Tk()
+                    Frontend.dashboard.Dashboard(tk,data[0],row[0][0])
+
 
                 else:
                     messagebox.showerror('Error', 'Invalid username and password')
@@ -83,6 +87,6 @@ class Login_Page:
                     messagebox.showinfo("Error", "User not registered !! Register first")
 
 
-'''wn = Tk()
-Login_Page(wn)
-wn.mainloop()'''
+# wn = Tk()
+# Login_Page(wn)
+# wn.mainloop()

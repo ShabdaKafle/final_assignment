@@ -1,10 +1,16 @@
 from tkinter import *
 from PIL import Image, ImageTk
+import Frontend.records
+import Frontend.profile
+import Frontend.billing
 
 
 class Dashboard:
-    def __init__(self,root):
+    def __init__(self,root,username=None,hostelname=None):
         self.root=root
+        self.username=username
+        self.hostelname=hostelname
+
         self.root.title('dashboard')
         self.root.geometry('750x550')
         self.root.config(bg="white")
@@ -15,10 +21,10 @@ class Dashboard:
         self.F1.config(bg="purple")
 
 
-        lb1 = Label(self.F1, text = "Welcome username",font=('arial',20,'bold'),fg='black', bg=\
-                 "purple").place(x=50, y=5)
-        lb2 = Label(self.F1, text="Hostelname", font=('arial', 15, 'bold'), fg='black', bg=\
-        "purple").place(x=50, y=40)
+        # lb1 = Label(self.F1, text = "Welcome"+self.username,font=('arial',20,'bold'),fg='black', bg=\
+        #          "purple").place(x=50, y=5)
+        # lb2 = Label(self.F1, text=self.hostelname, font=('arial', 15, 'bold'), fg='black', bg=\
+        # "purple").place(x=50, y=40)
 
 
         self.F2 = Frame(self.root,bd=5, relief=GROOVE)
@@ -28,38 +34,57 @@ class Dashboard:
                             fg="white", bd=5, relief=RAISED).place(x=600, y=330, width=120)
 
         global dashboard
-        dashboard = PhotoImage(file=r"dash.png")
+        dashboard = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\dash5.png")
         dash = Label(self.F2, image = dashboard)
         dash.place(x=190, y=20)
 
         global billing
-        billing = PhotoImage(file=r"bill.png")
+        billing = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\bill3.png")
         bill = Label(self.F2, image=billing)
         bill.place(x=190, y=180)
 
         global records
-        records = PhotoImage(file=r"record.png")
+        records = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\record4.png")
         rec = Label(self.F2, image=records)
         rec.place(x=370, y=20)
 
         global profile
-        profile = PhotoImage(file=r"profile.png")
+        profile = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\profile1.png")
         prof = Label(self.F2, image=profile)
         prof.place(x= 370, y=180)
 
         btn_dash = Button(self.F2, image = dashboard, relief=RAISED, bd=9)
         btn_dash.place(x=190, y=20)
 
-        btn_bill = Button(self.F2, image=billing, relief=RAISED, bd=9)
+        btn_bill = Button(self.F2, image=billing, relief=RAISED, bd=9, command=self.btn_bill)
         btn_bill.place(x=190, y=180)
 
-        btn_recn = Button(self.F2, image=records, relief=RAISED, bd=9)
+        btn_recn = Button(self.F2, image=records, relief=RAISED, bd=9, command=self.rec_btn)
         btn_recn.place(x=370, y=20)
 
-        btn_prof = Button(self.F2, image=profile, relief=RAISED, bd=9)
+        btn_prof = Button(self.F2, image=profile, relief=RAISED, bd=9,command=self.prof_btn)
         btn_prof.place(x= 370, y=180)
 
-'''ac = Tk()
-Dashboard(ac)
-ac.mainloop()'''
+    def rec_btn(self):
+        self.root.destroy()
+        tk = Tk()
+        Frontend.records.Record(tk)
+
+    def prof_btn(self):
+        self.root.destroy()
+        tk = Tk()
+        Frontend.profile.Profile(tk)
+
+    def btn_bill(self):
+        self.root.destroy()
+        tk = Tk()
+        Frontend.billing.Billing(tk)
+
+
+
+
+
+# ac = Tk()
+# Dashboard(ac)
+# ac.mainloop()
         

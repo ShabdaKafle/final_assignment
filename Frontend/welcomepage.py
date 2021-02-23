@@ -20,7 +20,7 @@ class Welcome:
         self.frame2.place(x=1, y=70, width=350, height=430)
 
         global hostel
-        hostel = PhotoImage(file="hostel1.png")
+        hostel = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\hostel1.png")
         das = Label(self.frame2, image=hostel)
         das.place(x=60, y=90)
 
@@ -41,13 +41,15 @@ class Welcome:
                                 fg="white", relief=RAISED, command=self.btn_signup).place(x=270, y=135)
 
     def btn_signin(self):
-        tk = Toplevel()
+        self.fpage.destroy()
+        tk = Tk()
         Frontend.loginpage.Login_Page(tk)
 
     def btn_signup(self):
-        tk = Toplevel()
+        self.fpage.destroy()
+        tk = Tk()
         Frontend.registerpage.Register_Page(tk)
 
-'''ab = Tk()
-Welcome(ab)
-ab.mainloop()'''
+# ab = Tk()
+# Welcome(ab)
+# ab.mainloop()

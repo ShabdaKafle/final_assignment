@@ -113,9 +113,9 @@ class Register_Page:
         tk = Toplevel()
         Frontend.loginpage.Login_Page(tk)
 
-'''a = Tk()
-Register_Page(a)
-a.mainloop()'''
+# a = Tk()
+# Register_Page(a)
+# a.mainloop()
 
 
 
