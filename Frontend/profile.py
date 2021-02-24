@@ -53,15 +53,20 @@ class Profile:
         self.fra.place(x=200, y=1, width=500, height=430)
 
         quote = Label(self.fra, text="About the user", font=("arial 18 bold"), fg="royalblue", \
-                    bg="white").place(x=120, y=10)
+                    bg="white").place(x=120, y=40)
 
-        self.name = Label(self.fra, text="Name", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10, y=85)
+        global prof
+        prof = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\profile.png")
+        rec_icon = Label(self.root, image=prof)
+        rec_icon.place(x=210, y=10)
 
-        self.contact = Label(self.fra, text="Contact", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10,y=155)
+        self.name = Label(self.fra, text="Name", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10, y=125)
 
-        self.hostel = Label(self.fra, text="Hostel name", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10,y=225)
+        self.contact = Label(self.fra, text="Contact", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10,y=185)
 
-        self.address = Label(self.fra, text="Address", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10, y=295)
+        self.hostel = Label(self.fra, text="Hostel name", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10,y=245)
+
+        self.address = Label(self.fra, text="Address", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10, y=305)
 
     def btn_dash(self):
         self.root.destroy()

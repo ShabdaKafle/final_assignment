@@ -13,13 +13,24 @@ class Record:
 
         btn_add = Button(self.root, text="Add", font=("arial", 16, "bold"),width=7, relief=GROOVE,\
                          bd=5,bg="steelblue", fg="white", command=self.add_btn)
-        btn_add.place(x=620, y=10)
-
+        btn_add.place(x=380, y=10)
 
 
         btn_search = Button(self.root, text="Search", font=("arial", 16, "bold"), width=7,\
                             relief=GROOVE, bd=5,bg="steelblue", fg="white")
-        btn_search.place(x=740, y=10)
+        btn_search.place(x=500, y=10)
+
+
+        btn_delete = Button(self.root, text="Delete", font=("arial", 16, "bold"), width=7, \
+                            relief=GROOVE, bd=5, bg="steelblue", fg="white")
+        btn_delete.place(x=740, y=10)
+
+
+        btn_sort = Button(self.root, text="Sort", font=("arial", 16, "bold"), width=7, \
+                            relief=GROOVE, bd=5, bg="steelblue", fg="white")
+        btn_sort.place(x=620, y=10)
+
+
 
         global icon
         icon = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\rec_icon2.png")
