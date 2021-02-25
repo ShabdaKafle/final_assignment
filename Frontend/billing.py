@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 import Frontend.dashboard
 import Frontend.records
 import Frontend.profile
@@ -56,9 +57,45 @@ class Billing:
         quote2 = Label(self.f1, text="Billing details", font=("arial 18 bold"), fg="royalblue", \
                        bg="white").place(x=5, y=10)
 
-        self.name = Label(self.f1, text="Name ", font=("cambria 14 bold"), bg="white", fg="navy").place(x=10,y=70)
-        self.num = Entry(self.f1, bd=5, relief=GROOVE, width=15, font=("arial 13 bold"))
-        self.num.place(x=10, y=100)
+
+        self.bill = Label(self.f1, text="Bill number", font=("cambria 14 bold"), bg="white", fg="navy").place(x=10,y=70)
+        self.num = Entry(self.f1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
+        self.num.place(x=130, y=70)
+
+        self.date = Label(self.f1, text="Date", font=("cambria 14 bold"), bg="white", fg="navy").place(x=10,y=130)
+        self.da = Entry(self.f1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
+        self.da.place(x=130, y=130)
+
+        self.name = Label(self.f1, text="Name", font=("cambria 14 bold"), bg="white", fg="navy").place(x=10, y=190)
+        self.nm = Entry(self.f1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
+        self.nm.place(x=130, y=190)
+
+        self.type = Label(self.f1, text="Room type", font=("cambria 14 bold"), bg="white", fg="navy").place(x=10,y=250)
+        self.rtype = ttk.Combobox(self.f1, values=("2-seater", "3-seater", "4-seater"), state='readonly')
+        self.rtype.place(x=130, y=255)
+
+        self.month = Label(self.f1, text="For month of", font=("cambria 14 bold"), bg="white", fg="navy").place(x=10, y=310)
+        self.mn = Entry(self.f1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
+        self.mn.place(x=130, y=310)
+
+        self.total = Label(self.f1, text="Total", font=("cambria 14 bold"), bg="white", fg="navy").place(x=10, y=370)
+        self.fee = Entry(self.f1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
+        self.fee.place(x=130, y=370)
+
+        btn_bills = Button(self.f1, text="Generate Bill", font=("arial", 16, "bold"), width=12, relief=GROOVE, \
+                         bd=5, bg="steelblue", fg="white")
+        btn_bills.place(x=50, y=470)
+
+        btn_clear = Button(self.f1, text="Clear", font=("arial", 16, "bold"), width=7, \
+                            relief=GROOVE, bd=5, bg="steelblue", fg="white")
+        btn_clear.place(x=240, y=470)
+
+        self.frame1 = Frame(self.root, bg="white", bd=5, relief=GROOVE)
+        self.frame1.place(x=650, y=1, width=400, height=600)
+
+        
+
+
 
 
 
@@ -80,6 +117,6 @@ class Billing:
         Frontend.records.Record(tk)
 
 
-# at = Tk()
-# Billing(at)
-# at.mainloop()
+at = Tk()
+Billing(at)
+at.mainloop()

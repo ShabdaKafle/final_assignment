@@ -12,8 +12,8 @@ class Welcome:
 
         self.frame1 = Frame(self.fpage, bg= "purple")
         self.frame1.place(x=1, y=1, width=800, height=60)
-        quote1 = Label(self.frame1, text="Welcome To Hostel Billing System", font=("arial 20 bold"), fg="steelblue",\
-                       bg="purple").place(x=160, y=10)
+        quote1 = Label(self.frame1, text="Welcome To Hostel Management System", font=("arial 20 bold"), fg="steelblue",\
+                       bg="purple").place(x=120, y=10)
 
 
         self.frame2 = Frame(self.fpage,bg="purple", bd= 5, relief=GROOVE)

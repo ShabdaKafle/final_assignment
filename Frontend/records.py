@@ -3,6 +3,7 @@ import Frontend.add_students
 import Frontend.dashboard
 import Frontend.profile
 import Frontend.billing
+import Frontend.search_students
 
 class Record:
     def __init__(self, root):
@@ -17,7 +18,7 @@ class Record:
 
 
         btn_search = Button(self.root, text="Search", font=("arial", 16, "bold"), width=7,\
-                            relief=GROOVE, bd=5,bg="steelblue", fg="white")
+                            relief=GROOVE, bd=5,bg="steelblue", fg="white", command=self.btn_search)
         btn_search.place(x=500, y=10)
 
 
@@ -107,6 +108,11 @@ class Record:
         self.root.destroy()
         tk = Tk()
         Frontend.billing.Billing(tk)
+
+    def btn_search(self):
+        self.root.destroy()
+        tk = Tk()
+        Frontend.search_students.Search(tk)
 
 # bc = Tk()
 # Record(bc)
