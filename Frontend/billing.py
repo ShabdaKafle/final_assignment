@@ -93,12 +93,6 @@ class Billing:
         self.frame1 = Frame(self.root, bg="white", bd=5, relief=GROOVE)
         self.frame1.place(x=650, y=1, width=400, height=600)
 
-        
-
-
-
-
-
 
 
     def btn_dash(self):
@@ -117,6 +111,6 @@ class Billing:
         Frontend.records.Record(tk)
 
 
-at = Tk()
-Billing(at)
-at.mainloop()
+# at = Tk()
+# Billing(at)
+# at.mainloop()

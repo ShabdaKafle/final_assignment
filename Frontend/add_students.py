@@ -1,6 +1,7 @@
 from tkinter import *
 import Frontend.records
 from tkinter import ttk
+import model.student
 
 class Add:
     def __init__(self, root):
@@ -24,8 +25,8 @@ class Add:
                        bg="white").place(x=1, y=10)
 
         self.name = Label(self.fr1, text="Name", font=("cambria 14 bold"),bg="white", fg="navy").place(x=10, y=70)
-        self.name = Entry(self.fr1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
-        self.name.place(x=105, y=70)
+        self.nam = Entry(self.fr1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
+        self.nam.place(x=105, y=70)
 
         self.address = Label(self.fr1, text="Address", font=("cambria 14 bold"),bg="white", fg="navy").place(x=10, y=120)
         self.add = Entry(self.fr1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
@@ -87,6 +88,9 @@ class Add:
         self.root.destroy()
         tk = Tk()
         Frontend.records.Record(tk)
+
+
+
 
 # n = Tk()
 # Add(n)
