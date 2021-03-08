@@ -1,7 +1,10 @@
 from tkinter import *
+
 import Frontend.dashboard
 import Frontend.records
 import Frontend.billing
+import model.user
+import Backend.dbconnection
 
 class Profile:
     def __init__(self, root):
@@ -9,6 +12,10 @@ class Profile:
         self.root.title("profile")
         self.root.geometry('700x430')
         self.root.config(bg="white")
+
+        self.db = Backend.dbconnection.DBConnect()
+
+
 
         self.fr = Frame(self.root, bg="purple", bd=5, relief=FLAT)
         self.fr.place(x=1, y=1, width=200, height=430)
@@ -67,6 +74,14 @@ class Profile:
         self.hostel = Label(self.fra, text="Hostel name", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10,y=245)
 
         self.address = Label(self.fra, text="Address", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10, y=305)
+
+
+    # def profile_details(self):
+    #     query = "select username, hostelname, address, contact from user_data where username = '%s'"
+    #     values = ('', '', '', '')
+    #
+    #     rows = self.db.select(query, values)
+    #     Label(self.root, text=rows[1], font=("times new roman", 20, "bold"), bg="white", fg="navy").place(x=100, y=125)
 
     def btn_dash(self):
         self.root.destroy()

@@ -91,16 +91,18 @@ class Billing:
         self.fee.place(x=130, y=370)
 
         btn_bills = Button(self.f1, text="Generate Bill", font=("arial", 16, "bold"), width=12, relief=GROOVE, \
-                         bd=5, bg="steelblue", fg="white", command = self.btn_bill)
-        btn_bills.place(x=180, y=470)
+                         bd=5, bg="steelblue", fg="white", command=self.btn_save_bill)
+        btn_bills.place(x=50, y=470)
 
-        btn_save = Button(self.f1, text="Save", font=("arial", 16, "bold"), width=7, \
-                            relief=GROOVE, bd=5, bg="steelblue", fg="white", command=self.btn_save_bill)
-        btn_save.place(x=50, y=470)
+        btn_clear = Button(self.f1, text="Clear", font=("arial", 16, "bold"), width=7, \
+                            relief=GROOVE, bd=5, bg="steelblue", fg="white", command=self.clear_btn)
+        btn_clear.place(x=240, y=470)
 
 
         self.frame1 = Frame(self.root, bg="white", bd=5, relief=GROOVE)
         self.frame1.place(x=650, y=1, width=400, height=600)
+
+
 
 
     def btn_save_bill(self):
@@ -124,9 +126,29 @@ class Billing:
 
         messagebox.showinfo('Success', 'Bill saved successfully!')
 
+        query = "select * from bill_data where bill_number=%s"
+        values = (bill_number,)
+        rows = self.db.select(query, values)
+        print(rows)
 
-    def btn_bill(self):
-        pass
+        
+
+
+
+    def clear_btn(self):
+        self.num.delete(0, END)
+        self.da.delete(0, END)
+        self.nm.delete(0, END)
+        self.mn.delete(0, END)
+        self.fee.delete(0, END)
+
+        self.num.insert(0, '')
+        self.da.insert(0, '')
+        self.nm.insert(0, '')
+        self.rtype.set('')
+        self.mn.insert(0, '')
+        self.fee.insert(0, '')
+
 
 
     def btn_dash(self):

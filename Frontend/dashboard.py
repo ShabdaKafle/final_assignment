@@ -21,10 +21,10 @@ class Dashboard:
         self.F1.config(bg="purple")
 
 
-        # lb1 = Label(self.F1, text = "Welcome"+self.username,font=('arial',20,'bold'),fg='black', bg=\
-        #          "purple").place(x=50, y=5)
-        # lb2 = Label(self.F1, text=self.hostelname, font=('arial', 15, 'bold'), fg='black', bg=\
-        # "purple").place(x=50, y=40)
+        lb1 = Label(self.F1, text = "Welcome" + self.username,font=('arial',20,'bold'),fg='black', bg=\
+                 "purple").place(x=50, y=5)
+        lb2 = Label(self.F1, text=self.hostelname, font=('arial', 15, 'bold'), fg='black', bg=\
+                 "purple").place(x=50, y=40)
 
 
         self.F2 = Frame(self.root,bd=5, relief=GROOVE)

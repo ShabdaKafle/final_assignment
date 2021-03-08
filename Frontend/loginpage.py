@@ -81,6 +81,7 @@ class Login_Page:
                     Frontend.dashboard.Dashboard(tk,data[0],row[0][0])
 
 
+
                 else:
                     messagebox.showerror('Error', 'Invalid username and password')
             else:
