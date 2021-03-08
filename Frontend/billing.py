@@ -1,8 +1,14 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
+
+import Frontend.loginpage
 import Frontend.dashboard
 import Frontend.records
 import Frontend.profile
+
+import Backend.dbconnection
+import model.bill
 
 class Billing:
     def __init__(self, root):
@@ -10,6 +16,8 @@ class Billing:
         self.root.title("billing")
         self.root.geometry('1050x600')
         self.root.config(bg="white")
+
+        self.db = Backend.dbconnection.DBConnect()
 
         self.frame = Frame(self.root, bg="purple", bd=5, relief=FLAT)
         self.frame.place(x=1, y=1, width=200, height=600)
@@ -83,16 +91,42 @@ class Billing:
         self.fee.place(x=130, y=370)
 
         btn_bills = Button(self.f1, text="Generate Bill", font=("arial", 16, "bold"), width=12, relief=GROOVE, \
-                         bd=5, bg="steelblue", fg="white")
-        btn_bills.place(x=50, y=470)
+                         bd=5, bg="steelblue", fg="white", command = self.btn_bill)
+        btn_bills.place(x=180, y=470)
 
-        btn_clear = Button(self.f1, text="Clear", font=("arial", 16, "bold"), width=7, \
-                            relief=GROOVE, bd=5, bg="steelblue", fg="white")
-        btn_clear.place(x=240, y=470)
+        btn_save = Button(self.f1, text="Save", font=("arial", 16, "bold"), width=7, \
+                            relief=GROOVE, bd=5, bg="steelblue", fg="white", command=self.btn_save_bill)
+        btn_save.place(x=50, y=470)
+
 
         self.frame1 = Frame(self.root, bg="white", bd=5, relief=GROOVE)
         self.frame1.place(x=650, y=1, width=400, height=600)
 
+
+    def btn_save_bill(self):
+        bill_number = self.num.get()
+        date = self.da.get()
+        name = self.nm.get()
+        room_type = self.rtype.get()
+        month = self.mn.get()
+        total_fees = self.fee.get()
+
+        if bill_number == '' or date == '' or name == '' or room_type == '' or month == '' or total_fees == '':
+            messagebox.showerror('Error', 'Please fill the empty field')
+            return
+
+        u = model.bill.Bill(bill_number, date, name, room_type, month, total_fees)
+
+        query = "insert into bill_data(bill_number, date, student_name, room_type, month_of_paying, total_fees) values(%s,%s,%s,%s,%s,%s)"
+        values = (u.get_bill_num(), u.get_date(), u.get_name(), u.get_room(), u.get_month(), u.get_fees())
+
+        self.db.insert(query, values)
+
+        messagebox.showinfo('Success', 'Bill saved successfully!')
+
+
+    def btn_bill(self):
+        pass
 
 
     def btn_dash(self):

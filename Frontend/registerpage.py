@@ -50,13 +50,16 @@ class Register_Page:
         self.conpw.place(x=180, y=370)
 
         self.var_chk = IntVar()
-        chk = Checkbutton(self.fr1, text="I agree to the terms and conditions", variable=self.var_chk, onvalue=1, offvalue=0, font=("arial 12 bold")).place(x=100, y=450)
+        chk = Checkbutton(self.fr1, text="I agree to the terms and conditions", variable=self.var_chk, onvalue=1, offvalue=0,\
+                          font=("arial 12 bold")).place(x=100, y=450)
 
 
-        btn_register = Button(self.fr1, text='Register', font=('arial', 15, 'bold'), width=8, bd=5, bg="steelblue", fg="white", relief=RAISED,command=self.add_click, padx=5)
+        btn_register = Button(self.fr1, text='Register', font=('arial', 15, 'bold'), width=8, bd=5, bg="steelblue", fg="white",\
+                              relief=RAISED,command=self.add_click, padx=5)
         btn_register.place(x=140, y=520)
 
-        btn_reset = Button(self.fr1, text='Reset', font=('arial', 15, 'bold'), width=8, bd=5,bg="steelblue",fg="white", relief=RAISED,command=self.reset_click, padx=5)
+        btn_reset = Button(self.fr1, text='Reset', font=('arial', 15, 'bold'), width=8, bd=5,bg="steelblue",fg="white",\
+                           relief=RAISED,command=self.reset_click, padx=5)
         btn_reset.place(x=290, y=520)
 
 
