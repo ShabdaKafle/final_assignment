@@ -65,7 +65,7 @@ class Student:
     def set_room_number(self, rnum):
         self.__room_numbernumber = rnum
     def get_room_number(self):
-        return self.__room_numbernumber
+        return self.__room_number
 
 
     def set_room_type(self,rtype):
