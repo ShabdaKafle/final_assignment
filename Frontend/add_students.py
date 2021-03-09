@@ -7,8 +7,12 @@ import model.student
 import Backend.dbconnection
 
 class Add:
-    def __init__(self, root):
+    def __init__(self, root, username=None, hostelname=None, contact=None, address=None):
         self.root = root
+        self.username = username
+        self.hostelname = hostelname
+        self.contact = contact
+        self.address = address
         self.root.title("Adding students")
         self.root.geometry("1050x700")
         self.root.config(bg="purple")
@@ -33,11 +37,11 @@ class Add:
         self.nam = Entry(self.fr1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
         self.nam.place(x=105, y=70)
 
-        self.address = Label(self.fr1, text="Address", font=("cambria 14 bold"),bg="white", fg="navy").place(x=10, y=120)
+        self.address1 = Label(self.fr1, text="Address", font=("cambria 14 bold"),bg="white", fg="navy").place(x=10, y=120)
         self.add = Entry(self.fr1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
         self.add.place(x=105, y=120)
 
-        self.contact = Label(self.fr1, text="Contact", font=("cambria 14 bold"),bg="white", fg="navy").place(x=10, y=170)
+        self.contact1 = Label(self.fr1, text="Contact", font=("cambria 14 bold"),bg="white", fg="navy").place(x=10, y=170)
         self.cont = Entry(self.fr1, bd=5, relief=GROOVE, width=25, font=("arial 13 bold"))
         self.cont.place(x=105, y=170)
 
@@ -173,7 +177,7 @@ class Add:
     def btn_record(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk)
+        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
 
 
 

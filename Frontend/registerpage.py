@@ -5,6 +5,7 @@ from tkinter import messagebox
 import model.user
 import Backend.dbconnection
 import Frontend.loginpage
+import Frontend.welcomepage
 
 
 class Register_Page:
@@ -56,11 +57,16 @@ class Register_Page:
 
         btn_register = Button(self.fr1, text='Register', font=('arial', 15, 'bold'), width=8, bd=5, bg="steelblue", fg="white",\
                               relief=RAISED,command=self.add_click, padx=5)
-        btn_register.place(x=140, y=520)
+        btn_register.place(x=70, y=520)
 
         btn_reset = Button(self.fr1, text='Reset', font=('arial', 15, 'bold'), width=8, bd=5,bg="steelblue",fg="white",\
                            relief=RAISED,command=self.reset_click, padx=5)
-        btn_reset.place(x=290, y=520)
+        btn_reset.place(x=200, y=520)
+
+        btn_back = Button(self.fr1, text='Back', font=('arial', 15, 'bold'), width=8, bd=5, bg="steelblue",
+                           fg="white", \
+                           relief=RAISED, command=self.back_click, padx=5)
+        btn_back.place(x=330, y=520)
 
 
 
@@ -78,6 +84,12 @@ class Register_Page:
         self.cont.insert(0, '')
         self.pw1.insert(0, '')
         self.conpw.insert(0, '')
+
+    def back_click(self):
+        self.register.destroy()
+        tk = Tk()
+        Frontend.welcomepage.Welcome(tk)
+
 
     def add_click(self):
         username = self.uname.get()

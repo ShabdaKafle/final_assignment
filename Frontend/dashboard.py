@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from PIL import Image, ImageTk
 import Frontend.records
 import Frontend.profile
@@ -71,7 +72,7 @@ class Dashboard:
     def rec_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk, self.username, self.hostelname)
+        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
 
     def prof_btn(self):
         self.root.destroy()
@@ -81,13 +82,15 @@ class Dashboard:
     def btn_bill(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.billing.Billing(tk,self.username, self.hostelname)
+        Frontend.billing.Billing(tk,self.username, self.hostelname, self.address, self.contact)
 
 
     def logout_btn(self):
-        self.root.destroy()
-        tk = Tk()
-        Frontend.welcomepage.Welcome(tk)
+        logout_btn = messagebox.askyesno("Logout confirm", "Do you want to logout?")
+        if logout_btn > 0:
+            self.root.destroy()
+            tk = Tk()
+            Frontend.welcomepage.Welcome(tk)
 
 
 

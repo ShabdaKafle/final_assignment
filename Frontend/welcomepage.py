@@ -40,6 +40,9 @@ class Welcome:
         self.signupbtn = Button(self.frame3, text="Sign up", font=("times new roman", 14, "bold"), bd=5, bg="purple", \
                                 fg="white", relief=RAISED, command=self.btn_signup).place(x=270, y=135)
 
+        self.exit_btn = Button(self.frame3, text="Exit", font=("times new roman", 14, "bold"), bd=5, width=12,bg="steelblue", \
+                                fg="white", relief=RAISED, command=self.btn_exit).place(x=280, y=370)
+
     def btn_signin(self):
         self.fpage.destroy()
         tk = Tk()
@@ -49,6 +52,9 @@ class Welcome:
         self.fpage.destroy()
         tk = Tk()
         Frontend.registerpage.Register_Page(tk)
+
+    def btn_exit(self):
+        self.fpage.destroy()
 
 # ab = Tk()
 # Welcome(ab)

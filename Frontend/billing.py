@@ -187,7 +187,7 @@ class Billing:
     def btn_dash(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.dashboard.Dashboard(tk, self.username, self.hostelname)
+        Frontend.dashboard.Dashboard(tk, self.username, self.hostelname, self.address, self.contact)
 
     def prof_btn(self):
         self.root.destroy()
@@ -197,7 +197,7 @@ class Billing:
     def rec_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk, self.username, self.hostelname)
+        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
 
 
 # at = Tk()

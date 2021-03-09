@@ -1,5 +1,5 @@
 class Student:
-    def __init__(self, nam, add, cont, prof, pname, pnum, guardain, num, rnum, rtype, rpartners, rpartner, rpartner1, rfee ):
+    def __init__(self, nam, add, cont, prof, pname, pnum, guardain, num, rnum, rtype, rfee,rpartners=None, rpartner=None, rpartner1=None ):
         self.__name = nam
         self.__address = add
         self.__contact = cont

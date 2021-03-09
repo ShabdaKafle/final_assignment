@@ -3,8 +3,13 @@ import Frontend.records
 from tkinter import ttk
 import Backend.dbconnection
 class Search:
-    def __init__(self, root):
+    def __init__(self, root, username=None, hostelname=None, address=None, contact=None):
         self.root = root
+        self.username = username
+        self.hostelname = hostelname
+        self.address = address
+        self.contact = contact
+
         self.root.title("searching")
         self.root.geometry('800x500')
         self.root.config(bg="white")
@@ -19,9 +24,11 @@ class Search:
 
         btn_add = Button(self.fa, image=icon, command=self.btn_record)
         btn_add.place(x=15, y=15)
+
         self.selected = StringVar()
         optns = ["Id","Name"]
         self.selected.set("Select")
+
         self.search = Label(self.fa, text="Search by:", font=("arial 20 bold"), fg="navy", \
                     bg="purple").place(x=150, y=30)
         self.s = OptionMenu(self.fa, self.selected,*optns)
@@ -49,13 +56,17 @@ class Search:
         self.db = Backend.dbconnection.DBConnect()
         record = self.db.select(query,)
         for i in record:
-            if i[index] == item:
+            if i(index) == item:
                 print(i)
+                item = i
+                # self.(treeview).insert('', 'end', values=(item[0], item[1], item[2], item[3], item[4], item[5]))
+            elif not item:
+                print("User not found")
 
     def btn_record(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk)
+        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
 
 # an = Tk()
 # Search(an)

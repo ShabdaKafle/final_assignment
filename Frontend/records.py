@@ -84,11 +84,11 @@ class Record:
 
 
         self.fram = Frame(self.root, bg= "white", bd=5, relief=GROOVE)
-        self.fram.place(x=230, y=70, width= 620, height=430)
+        self.fram.place(x=230, y=70, width= 820, height=630)
 
 
         self.fr = Frame(self.fram, bg="purple")
-        self.fr.place(x=1, y=1, width=608, height=40)
+        self.fr.place(x=1, y=1, width=806, height=40)
 
         quote1 = Label(self.fr, text="Student records", font=("arial 16 bold"), fg="royalblue", \
                        bg="purple").place(x=1, y=1)
@@ -96,12 +96,12 @@ class Record:
     def add_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.add_students.Add(tk)
+        Frontend.add_students.Add(tk, self.username, self.hostelname, self.address, self.contact)
 
     def btn_dash(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.dashboard.Dashboard(tk,self.username,self.hostelname)
+        Frontend.dashboard.Dashboard(tk,self.username,self.hostelname, self.address, self.contact)
 
     def prof_btn(self):
         self.root.destroy()
@@ -111,12 +111,12 @@ class Record:
     def btn_bill(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.billing.Billing(tk, self.username, self.hostelname)
+        Frontend.billing.Billing(tk, self.username, self.hostelname, self.address, self.contact)
 
     def btn_search(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.search_students.Search(tk)
+        Frontend.search_students.Search(tk, self.username, self.hostelname, self.address, self.contact)
 
 # bc = Tk()
 # Record(bc)
