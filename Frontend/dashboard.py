@@ -3,13 +3,16 @@ from PIL import Image, ImageTk
 import Frontend.records
 import Frontend.profile
 import Frontend.billing
+import Frontend.welcomepage
 
 
 class Dashboard:
-    def __init__(self,root,username=None,hostelname=None):
+    def __init__(self,root,username=None,hostelname=None, address=None, contact=None):
         self.root=root
         self.username=username
         self.hostelname=hostelname
+        self.address = address
+        self.contact = contact
 
         self.root.title('dashboard')
         self.root.geometry('750x550')
@@ -21,7 +24,7 @@ class Dashboard:
         self.F1.config(bg="purple")
 
 
-        lb1 = Label(self.F1, text = "Welcome" + self.username,font=('arial',20,'bold'),fg='black', bg=\
+        lb1 = Label(self.F1, text = self.username,font=('arial',20,'bold'),fg='black', bg=\
                  "purple").place(x=50, y=5)
         lb2 = Label(self.F1, text=self.hostelname, font=('arial', 15, 'bold'), fg='black', bg=\
                  "purple").place(x=50, y=40)
@@ -31,7 +34,7 @@ class Dashboard:
         self.F2.place(x=1, y=150, width=750, height=400)
         self.F2.config(bg="white")
         btn_logout = Button(self.F2, text="Logout", justify="center", font=("times new roman", 16, "bold"), bg="purple", \
-                            fg="white", bd=5, relief=RAISED).place(x=600, y=330, width=120)
+                            fg="white", bd=5, relief=RAISED, command=self.logout_btn).place(x=600, y=330, width=120)
 
         global dashboard
         dashboard = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\dash5.png")
@@ -68,17 +71,23 @@ class Dashboard:
     def rec_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk)
+        Frontend.records.Record(tk, self.username, self.hostelname)
 
     def prof_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.profile.Profile(tk)
+        Frontend.profile.Profile(tk,self.username, self.hostelname, self.address, self.contact)
 
     def btn_bill(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.billing.Billing(tk)
+        Frontend.billing.Billing(tk,self.username, self.hostelname)
+
+
+    def logout_btn(self):
+        self.root.destroy()
+        tk = Tk()
+        Frontend.welcomepage.Welcome(tk)
 
 
 

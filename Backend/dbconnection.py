@@ -9,7 +9,7 @@ class DBConnect:
         self.cur.execute(query,values)
         self.con.commit()
 
-    def select(self,query, values):
+    def select(self,query, values=None):
         self.cur.execute(query, values)
         rows = self.cur.fetchall()
         return rows

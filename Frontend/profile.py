@@ -7,14 +7,18 @@ import model.user
 import Backend.dbconnection
 
 class Profile:
-    def __init__(self, root):
+    def __init__(self, root, username=None, hostelname=None, address=None, contact=None):
         self.root = root
+        self.username = username
+        self.hostelname = hostelname
+        self.address = address
+        self.contact = contact
+
         self.root.title("profile")
         self.root.geometry('700x430')
         self.root.config(bg="white")
 
         self.db = Backend.dbconnection.DBConnect()
-
 
 
         self.fr = Frame(self.root, bg="purple", bd=5, relief=FLAT)
@@ -68,29 +72,33 @@ class Profile:
         rec_icon.place(x=210, y=10)
 
         self.name = Label(self.fra, text="Name", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10, y=125)
+        Label(self.fra, text = self.username, font=("cambria 20 bold"), bg="white", fg="navy").place(x=200, y=125)
 
-        self.contact = Label(self.fra, text="Contact", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10,y=185)
+        self.contact1 = Label(self.fra, text="Contact", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10,y=185)
+        Label(self.fra, text=self.contact, font=("cambria 20 bold"), bg="white", fg="navy").place(x=200, y=185)
 
         self.hostel = Label(self.fra, text="Hostel name", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10,y=245)
+        Label(self.fra, text=self.hostelname, font=("cambria 20 bold"), bg="white", fg="navy").place(x=200, y=245)
 
-        self.address = Label(self.fra, text="Address", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10, y=305)
+        self.address1 = Label(self.fra, text="Address", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10, y=305)
+        Label(self.fra, text=self.address, font=("cambria 20 bold"), bg="white", fg="navy").place(x=200, y=305)
 
 
 
     def btn_dash(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.dashboard.Dashboard(tk)
+        Frontend.dashboard.Dashboard(tk, self.username, self.hostelname, self.address, self.contact)
 
     def rec_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk)
+        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
 
     def btn_bill(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.billing.Billing(tk)
+        Frontend.billing.Billing(tk, self.username, self.hostelname, self.address, self.contact)
 
 
 # ag = Tk()

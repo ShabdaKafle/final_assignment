@@ -3,6 +3,7 @@ from tkinter import messagebox
 import Frontend.registerpage
 import Backend.dbconnection
 import Frontend.dashboard
+import Frontend.profile
 
 class Login_Page:
     def __init__(self, root):
@@ -73,12 +74,15 @@ class Login_Page:
                 if uname == data[0] and passw == data[1]:
                     self.btn_reset_click()
                     messagebox.showinfo('Success', 'Congratulations!! login successful')
-                    query="select hostelname from user_data where username=%s"
+                    query="select hostelname, address, contact from user_data where username=%s"
                     values=(data[0],)
                     row=self.db.select(query,values)
+                    print(row)
                     self.root.destroy()
                     tk = Tk()
-                    Frontend.dashboard.Dashboard(tk,data[0],row[0][0])
+                    Frontend.dashboard.Dashboard(tk,data[0],row[0][0], row[0][1], row[0][2])
+                    # Frontend.profile.Profile(tk, data[0],row[0][0], row[0][1], row[0][2])
+
 
 
 

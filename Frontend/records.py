@@ -6,11 +6,15 @@ import Frontend.billing
 import Frontend.search_students
 
 class Record:
-    def __init__(self, root):
+    def __init__(self, root, username=None,hostelname=None, contact=None, address=None):
         self.root = root
         self.root.title("records")
         self.root.geometry('1050x700')
         self.root.config(bg="white")
+        self.username = username
+        self.hostelname = hostelname
+        self.contact = contact
+        self.address = address
 
         btn_add = Button(self.root, text="Add", font=("arial", 16, "bold"),width=7, relief=GROOVE,\
                          bd=5,bg="steelblue", fg="white", command=self.add_btn)
@@ -97,23 +101,23 @@ class Record:
     def btn_dash(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.dashboard.Dashboard(tk)
+        Frontend.dashboard.Dashboard(tk,self.username,self.hostelname)
 
     def prof_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.profile.Profile(tk)
+        Frontend.profile.Profile(tk, self.username, self.hostelname, self.address, self.contact)
 
     def btn_bill(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.billing.Billing(tk)
+        Frontend.billing.Billing(tk, self.username, self.hostelname)
 
     def btn_search(self):
         self.root.destroy()
         tk = Tk()
         Frontend.search_students.Search(tk)
 
-bc = Tk()
-Record(bc)
-bc.mainloop()
+# bc = Tk()
+# Record(bc)
+# bc.mainloop()

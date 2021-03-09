@@ -11,11 +11,15 @@ import Backend.dbconnection
 import model.bill
 
 class Billing:
-    def __init__(self, root):
+    def __init__(self, root, username=None, hostelname=None, address=None, contact=None):
         self.root = root
         self.root.title("billing")
         self.root.geometry('1050x600')
         self.root.config(bg="white")
+        self.username = username
+        self.hostelname = hostelname
+        self.address = address
+        self.contact = contact
 
         self.db = Backend.dbconnection.DBConnect()
 
@@ -183,17 +187,17 @@ class Billing:
     def btn_dash(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.dashboard.Dashboard(tk)
+        Frontend.dashboard.Dashboard(tk, self.username, self.hostelname)
 
     def prof_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.profile.Profile(tk)
+        Frontend.profile.Profile(tk, self.username, self.hostelname, self.address, self.contact)
 
     def rec_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk)
+        Frontend.records.Record(tk, self.username, self.hostelname)
 
 
 # at = Tk()
