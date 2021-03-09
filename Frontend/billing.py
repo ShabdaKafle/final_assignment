@@ -98,10 +98,8 @@ class Billing:
                             relief=GROOVE, bd=5, bg="steelblue", fg="white", command=self.clear_btn)
         btn_clear.place(x=240, y=470)
 
-
         self.frame1 = Frame(self.root, bg="white", bd=5, relief=GROOVE)
         self.frame1.place(x=650, y=1, width=400, height=600)
-
 
 
 
@@ -130,6 +128,37 @@ class Billing:
         values = (bill_number,)
         rows = self.db.select(query, values)
         print(rows)
+        data = []
+
+        if len(rows) != 0:
+            for row in rows:
+                data.append(row[0])
+                data.append(row[1])
+                data.append(row[2])
+                data.append(row[3])
+                data.append(row[4])
+                data.append(row[5])
+                print(data)
+
+                Label(self.frame1, text="Hostel Bill", font=("times new roman", 20, "bold"), bg="white", fg="steelblue").place(x=120, y=5)
+
+                Label(self.frame1, text="Bill number:", font=("times new roman", 15), bg="white", fg="steelblue").place(x=10, y=70)
+                Label(self.frame1, text=data[0], font=("times new roman", 15), bg="white", fg="steelblue").place(x=120, y=70)
+
+                Label(self.frame1, text="Date:", font=("times new roman", 15), bg="white", fg="steelblue").place(x=200, y=110)
+                Label(self.frame1, text=data[1], font=("times new roman", 15), bg="white", fg="steelblue").place(x=250, y=110)
+
+                Label(self.frame1, text="Student Name:", font=("times new roman", 15), bg="white", fg="steelblue").place(x=10, y=200)
+                Label(self.frame1, text=data[2], font=("times new roman", 15),bg="white", fg="steelblue").place(x=140, y=200)
+
+                Label(self.frame1, text="Room Type:", font=("times new roman",15), bg="white", fg="steelblue").place(x=10, y=300)
+                Label(self.frame1, text=data[3], font=("times new roman", 15), bg="white", fg="steelblue").place(x=120, y=300)
+
+                Label(self.frame1, text="Paying for the month of:", font=("times new roman",15), bg="white", fg="steelblue").place(x=10, y=250)
+                Label(self.frame1, text=data[4], font=("times new roman", 15), bg="white", fg="steelblue").place(x=210, y=250)
+
+                Label(self.frame1, text="Total fees:", font=("times new roman", 15),bg="white", fg="steelblue").place(x=160, y=440)
+                Label(self.frame1, text=data[5], font=("times new roman", 15), bg="white", fg="steelblue").place(x=260, y=440)
 
         
 

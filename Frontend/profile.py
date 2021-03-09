@@ -76,12 +76,6 @@ class Profile:
         self.address = Label(self.fra, text="Address", font=("cambria 20 bold"), bg="white", fg="navy").place(x=10, y=305)
 
 
-    # def profile_details(self):
-    #     query = "select username, hostelname, address, contact from user_data where username = '%s'"
-    #     values = ('', '', '', '')
-    #
-    #     rows = self.db.select(query, values)
-    #     Label(self.root, text=rows[1], font=("times new roman", 20, "bold"), bg="white", fg="navy").place(x=100, y=125)
 
     def btn_dash(self):
         self.root.destroy()

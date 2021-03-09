@@ -9,7 +9,7 @@ class Record:
     def __init__(self, root):
         self.root = root
         self.root.title("records")
-        self.root.geometry('850x500')
+        self.root.geometry('1050x700')
         self.root.config(bg="white")
 
         btn_add = Button(self.root, text="Add", font=("arial", 16, "bold"),width=7, relief=GROOVE,\
@@ -114,6 +114,6 @@ class Record:
         tk = Tk()
         Frontend.search_students.Search(tk)
 
-# bc = Tk()
-# Record(bc)
-# bc.mainloop()
+bc = Tk()
+Record(bc)
+bc.mainloop()
