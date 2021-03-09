@@ -40,12 +40,41 @@ class Search:
                             relief=GROOVE, bd=5, bg="steelblue", fg="white",command=self.serch)
         btn_search.place(x=660, y=25)
 
+
+    def serch(self):
+
         self.fa1 = Frame(self.root, bg="white", bd=5, relief=GROOVE)
         self.fa1.place(x=1, y=100, width=800, height=400)
 
+        scroll_x = Scrollbar(self.fa1, orient=HORIZONTAL)
+        scroll_y = Scrollbar(self.fa1, orient=VERTICAL)
+        student_record = ttk.Treeview(self.fa1, columns=(
+            "id", "name", "address", "contact", "profession", "parentsnum", "localnum", "roomnum", "roomtype"), \
+                                      xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
 
+        scroll_x.pack(side=BOTTOM, fill=X)
+        scroll_y.pack(side=RIGHT, fill=Y)
+        scroll_x.config(command=student_record.xview)
+        scroll_y.config(command=student_record.yview)
 
-    def serch(self):
+        student_record.heading("id", text="ID")
+        student_record.heading("name", text="Name")
+        student_record.heading("address", text="Address")
+        student_record.heading("contact", text="Contact")
+        student_record.heading("profession", text="Profession")
+        student_record.heading("parentsnum", text="Parents number")
+        student_record.heading("localnum", text="Local guardians number")
+        student_record.heading("roomnum", text="Room number")
+        student_record.heading("roomtype", text="Room type")
+
+        student_record['show'] = 'headings'
+
+        student_record.column("id", width=60)
+        student_record.column("roomnum", width=120)
+        student_record.column("roomtype", width=120)
+
+        student_record.pack(fill=BOTH, expand=1)
+
         item = self.name.get()
         option = self.selected.get()
         query = "select * from student_data"
@@ -56,12 +85,13 @@ class Search:
         self.db = Backend.dbconnection.DBConnect()
         record = self.db.select(query,)
         for i in record:
-            if i(index) == item:
+            if i[index] == item:
                 print(i)
                 item = i
-                # self.(treeview).insert('', 'end', values=(item[0], item[1], item[2], item[3], item[4], item[5]))
+                student_record.insert('', 'end', values=(item[0], item[1], item[2], item[3], item[4], item[6], item[8], item[9], item[10]))
             elif not item:
                 print("User not found")
+
 
     def btn_record(self):
         self.root.destroy()

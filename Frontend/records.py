@@ -1,12 +1,15 @@
 from tkinter import *
+from tkinter import ttk
 import Frontend.add_students
 import Frontend.dashboard
 import Frontend.profile
 import Frontend.billing
 import Frontend.search_students
+import Backend.dbconnection
 
 class Record:
     def __init__(self, root, username=None,hostelname=None, contact=None, address=None):
+        self.db = Backend.dbconnection.DBConnect()
         self.root = root
         self.root.title("records")
         self.root.geometry('1050x700')
@@ -28,12 +31,16 @@ class Record:
 
         btn_delete = Button(self.root, text="Delete", font=("arial", 16, "bold"), width=7, \
                             relief=GROOVE, bd=5, bg="steelblue", fg="white")
-        btn_delete.place(x=740, y=10)
+        btn_delete.place(x=860, y=10)
 
 
         btn_sort = Button(self.root, text="Sort", font=("arial", 16, "bold"), width=7, \
                             relief=GROOVE, bd=5, bg="steelblue", fg="white")
-        btn_sort.place(x=620, y=10)
+        btn_sort.place(x=740, y=10)
+
+        btn_update = Button(self.root, text="Update", font=("arial", 16, "bold"), width=7, \
+                          relief=GROOVE, bd=5, bg="steelblue", fg="white")
+        btn_update.place(x=620, y=10)
 
 
 
@@ -93,6 +100,38 @@ class Record:
         quote1 = Label(self.fr, text="Student records", font=("arial 16 bold"), fg="royalblue", \
                        bg="purple").place(x=1, y=1)
 
+        scroll_x=Scrollbar(self.fram, orient=HORIZONTAL)
+        scroll_y=Scrollbar(self.fram, orient=VERTICAL)
+        student_record = ttk.Treeview(self.fram, columns=("id", "name", "address", "contact", "profession","parentsnum", "localnum", "roomnum", "roomtype"),\
+                                      xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+
+        scroll_x.pack(side=BOTTOM,fill=X)
+        scroll_y.pack(side=RIGHT,fill=Y)
+        scroll_x.config(command=student_record.xview)
+        scroll_y.config(command=student_record.yview)
+
+        student_record.heading("id", text="ID")
+        student_record.heading("name", text="Name")
+        student_record.heading("address", text="Address")
+        student_record.heading("contact", text="Contact")
+        student_record.heading("profession", text="Profession")
+        student_record.heading("parentsnum", text="Parents number")
+        student_record.heading("localnum", text="Local guardians number")
+        student_record.heading("roomnum", text="Room number")
+        student_record.heading("roomtype", text="Room type")
+
+        student_record['show']='headings'
+
+        student_record.column("id",width=60)
+        student_record.column("roomnum", width=120)
+        student_record.column("roomtype", width=120)
+
+        student_record.pack(fill=BOTH, expand=1)
+
+        records = self.get_all_records()
+
+        print(records)
+
     def add_btn(self):
         self.root.destroy()
         tk = Tk()
@@ -117,6 +156,9 @@ class Record:
         self.root.destroy()
         tk = Tk()
         Frontend.search_students.Search(tk, self.username, self.hostelname, self.address, self.contact)
+
+    def get_all_records(self):
+        return self.db.select("select * from student_data"), None
 
 # bc = Tk()
 # Record(bc)

@@ -96,11 +96,15 @@ class Billing:
 
         btn_bills = Button(self.f1, text="Generate Bill", font=("arial", 16, "bold"), width=12, relief=GROOVE, \
                          bd=5, bg="steelblue", fg="white", command=self.btn_save_bill)
-        btn_bills.place(x=50, y=470)
+        btn_bills.place(x=20, y=470)
 
         btn_clear = Button(self.f1, text="Clear", font=("arial", 16, "bold"), width=7, \
                             relief=GROOVE, bd=5, bg="steelblue", fg="white", command=self.clear_btn)
-        btn_clear.place(x=240, y=470)
+        btn_clear.place(x=200, y=470)
+
+        btn_update = Button(self.f1, text="Update", font=("arial", 16, "bold"), width=7, \
+                           relief=GROOVE, bd=5, bg="steelblue", fg="white", command=self.update_btn)
+        btn_update.place(x=315, y=470)
 
         self.frame1 = Frame(self.root, bg="white", bd=5, relief=GROOVE)
         self.frame1.place(x=650, y=1, width=400, height=600)
@@ -166,6 +170,25 @@ class Billing:
 
         
 
+    def update_btn(self):
+        bill_number = self.num.get()
+        date = self.da.get()
+        name = self.nm.get()
+        room_type = self.rtype.get()
+        month = self.mn.get()
+        total_fees = self.fee.get()
+
+        if bill_number == '' or date == '' or name == '' or room_type == '' or month == '' or total_fees == '':
+            messagebox.showerror('Error', 'Please fill the empty field')
+            return
+
+        u = model.bill.Bill(bill_number, date, name, room_type, month, total_fees)
+        print(u)
+        query = "update bill_data set date=%s, student_name=%s, room_type=%s, month_of_paying=%s, total_fees=%s where bill_number=%s"
+        values = (u.get_bill_num(), u.get_date(), u.get_name(), u.get_room(), u.get_month(), u.get_fees())
+
+        self.db.insert(query, values)
+        messagebox.showinfo('Success', 'Bill updated successfully!')
 
 
     def clear_btn(self):
