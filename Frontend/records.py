@@ -6,7 +6,7 @@ import Frontend.profile
 import Frontend.billing
 import Frontend.search_students
 import Backend.dbconnection
-
+import Frontend.update_students
 class Record:
     def __init__(self, root, username=None,hostelname=None, contact=None, address=None):
         self.db = Backend.dbconnection.DBConnect()
@@ -18,7 +18,7 @@ class Record:
         self.hostelname = hostelname
         self.contact = contact
         self.address = address
-
+        self.selected_index = -1
         btn_add = Button(self.root, text="Add", font=("arial", 16, "bold"),width=7, relief=GROOVE,\
                          bd=5,bg="steelblue", fg="white", command=self.add_btn)
         btn_add.place(x=380, y=10)
@@ -30,7 +30,7 @@ class Record:
 
 
         btn_delete = Button(self.root, text="Delete", font=("arial", 16, "bold"), width=7, \
-                            relief=GROOVE, bd=5, bg="steelblue", fg="white")
+                            relief=GROOVE, bd=5, bg="steelblue", fg="white", command=self.btn_delete)
         btn_delete.place(x=860, y=10)
 
 
@@ -39,7 +39,7 @@ class Record:
         btn_sort.place(x=740, y=10)
 
         btn_update = Button(self.root, text="Update", font=("arial", 16, "bold"), width=7, \
-                          relief=GROOVE, bd=5, bg="steelblue", fg="white")
+                          relief=GROOVE, bd=5, bg="steelblue", fg="white", command=self.update_btn)
         btn_update.place(x=620, y=10)
 
 
@@ -104,7 +104,7 @@ class Record:
         scroll_y=Scrollbar(self.fram, orient=VERTICAL)
         self.student_record = ttk.Treeview(self.fram, columns=("id", "name", "address", "contact", "profession","parentsnum", "localnum", "roomnum", "roomtype"),\
                                       xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
-
+        self.student_record.bind('<<TreeviewSelect>>', self.on_select)
         scroll_x.pack(side=BOTTOM,fill=X)
         scroll_y.pack(side=RIGHT,fill=Y)
         scroll_x.config(command=self.student_record.xview)
@@ -136,28 +136,21 @@ class Record:
         query= "select * from student_data"
         values = None
         rows = self.db.select(query,values)
-        # print(rows)
-        data = []
-
+        print('rows information', rows)
         if len(rows) != 0:
             self.student_record.delete(*self.student_record.get_children())
             for row in rows:
-                data.append(row[0])
-                data.append(row[1])
-                data.append(row[2])
-                data.append(row[3])
-                data.append(row[4])
-                data.append(row[6])
-                data.append(row[8])
-                data.append(row[9])
-                data.append(row[10])
-            print(data)
-            self.student_record.insert('', 'end', values=(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
+                self.student_record.insert('', 'end', values=(row[0], row[1], row[2], row[3], row[4], row[6], row[8], row[9], row[10]))
 
     def add_btn(self):
         self.root.destroy()
         tk = Tk()
         Frontend.add_students.Add(tk, self.username, self.hostelname, self.address, self.contact)
+
+    def update_btn(self):
+        self.root.destroy()
+        tk = Tk()
+        Frontend.update_students.Update(tk, self.username, self.hostelname, self.address, self.contact)
 
     def btn_dash(self):
         self.root.destroy()
@@ -179,10 +172,24 @@ class Record:
         tk = Tk()
         Frontend.search_students.Search(tk, self.username, self.hostelname, self.address, self.contact)
 
+    def btn_delete(self):
+        if(self.selected_index > 0):
+            self.delete_record(self.selected_index)
+            self.refresh_treeview()
 
+    def on_select(self, event):
+        curItem = self.student_record.focus()
+        self.selected_index = self.student_record.item(curItem)['values'][0]
 
+    def delete_record(self, id):
+        query = 'delete from student_data where student_id=%d'
+        self.db.cur.execute(query%id)
+        self.db.con.commit()
 
-#
+    def refresh_treeview(self):
+        self.student_record.delete(*self.student_record.get_children())
+        self.get_all_records()
+
 # bc = Tk()
 # Record(bc)
 # bc.mainloop()

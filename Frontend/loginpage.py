@@ -84,8 +84,6 @@ class Login_Page:
 
 
 
-
-
                 else:
                     messagebox.showerror('Error', 'Invalid username and password')
             else:

@@ -76,6 +76,7 @@ class Search:
         self.student_record.pack(fill=BOTH, expand=1)
 
     def serch(self):
+
         item = self.name.get()
         if item == '':
             messagebox.showerror('Error', 'Please fill the search field')
@@ -88,16 +89,16 @@ class Search:
         elif option == "Name":
             index = 1
         self.db = Backend.dbconnection.DBConnect()
-        record = self.db.select(query,)
+        record = self.db.select(query)
         for i in record:
-            if i[index] == item:
-                print(i)
+            if (option == 'Name' and i[index] == item) or (option == 'Id' and i[index] == int(item)):
                 item = i
+                self.student_record.delete(*self.student_record.get_children())
                 self.student_record.insert('', 'end', values=(item[0], item[1], item[2], item[3], item[4], item[6], item[8], item[9], item[10]))
 
             elif not item:
                 print("User not found")
-
+                messagebox.showerror("Error", "Ud")
 
 
     def btn_record(self):
