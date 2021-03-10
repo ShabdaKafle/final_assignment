@@ -102,35 +102,57 @@ class Record:
 
         scroll_x=Scrollbar(self.fram, orient=HORIZONTAL)
         scroll_y=Scrollbar(self.fram, orient=VERTICAL)
-        student_record = ttk.Treeview(self.fram, columns=("id", "name", "address", "contact", "profession","parentsnum", "localnum", "roomnum", "roomtype"),\
+        self.student_record = ttk.Treeview(self.fram, columns=("id", "name", "address", "contact", "profession","parentsnum", "localnum", "roomnum", "roomtype"),\
                                       xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
 
         scroll_x.pack(side=BOTTOM,fill=X)
         scroll_y.pack(side=RIGHT,fill=Y)
-        scroll_x.config(command=student_record.xview)
-        scroll_y.config(command=student_record.yview)
+        scroll_x.config(command=self.student_record.xview)
+        scroll_y.config(command=self.student_record.yview)
 
-        student_record.heading("id", text="ID")
-        student_record.heading("name", text="Name")
-        student_record.heading("address", text="Address")
-        student_record.heading("contact", text="Contact")
-        student_record.heading("profession", text="Profession")
-        student_record.heading("parentsnum", text="Parents number")
-        student_record.heading("localnum", text="Local guardians number")
-        student_record.heading("roomnum", text="Room number")
-        student_record.heading("roomtype", text="Room type")
+        self.student_record.heading("id", text="ID")
+        self.student_record.heading("name", text="Name")
+        self.student_record.heading("address", text="Address")
+        self.student_record.heading("contact", text="Contact")
+        self.student_record.heading("profession", text="Profession")
+        self.student_record.heading("parentsnum", text="Parents number")
+        self.student_record.heading("localnum", text="Local guardians number")
+        self.student_record.heading("roomnum", text="Room number")
+        self.student_record.heading("roomtype", text="Room type")
 
-        student_record['show']='headings'
+        self.student_record['show']='headings'
 
-        student_record.column("id",width=60)
-        student_record.column("roomnum", width=120)
-        student_record.column("roomtype", width=120)
+        self.student_record.column("id",width=60)
+        self.student_record.column("roomnum", width=120)
+        self.student_record.column("roomtype", width=120)
 
-        student_record.pack(fill=BOTH, expand=1)
+        self.student_record.pack(fill=BOTH, expand=1)
 
         records = self.get_all_records()
 
         print(records)
+
+    def get_all_records(self):
+        query= "select * from student_data"
+        values = None
+        rows = self.db.select(query,values)
+        # print(rows)
+        data = []
+
+        if len(rows) != 0:
+            self.student_record.delete(*self.student_record.get_children())
+            for row in rows:
+                data.append(row[0])
+                data.append(row[1])
+                data.append(row[2])
+                data.append(row[3])
+                data.append(row[4])
+                data.append(row[6])
+                data.append(row[8])
+                data.append(row[9])
+                data.append(row[10])
+            print(data)
+            self.student_record.insert('', 'end', values=(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
 
     def add_btn(self):
         self.root.destroy()
@@ -157,9 +179,10 @@ class Record:
         tk = Tk()
         Frontend.search_students.Search(tk, self.username, self.hostelname, self.address, self.contact)
 
-    def get_all_records(self):
-        return self.db.select("select * from student_data"), None
 
+
+
+#
 # bc = Tk()
 # Record(bc)
 # bc.mainloop()

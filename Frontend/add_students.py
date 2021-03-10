@@ -5,6 +5,7 @@ from tkinter import messagebox
 
 import model.student
 import Backend.dbconnection
+import Frontend.records
 
 class Add:
     def __init__(self, root, username=None, hostelname=None, contact=None, address=None):
@@ -18,6 +19,9 @@ class Add:
         self.root.config(bg="purple")
 
         self.db= Backend.dbconnection.DBConnect()
+
+
+
 
         global icon
         icon = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\back2.png")
@@ -139,6 +143,9 @@ class Add:
         self.db.insert(query, values)
 
         messagebox.showinfo('Success', 'Data saved sucessfully!')
+
+        self.rec = Frontend.records.Record(username=None, hostelname=None, contact=None, address=None)
+        self.rec.get_all_records()
         self.clear_btn()
 
 

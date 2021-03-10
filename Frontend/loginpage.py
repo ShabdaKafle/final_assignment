@@ -81,7 +81,7 @@ class Login_Page:
                     self.root.destroy()
                     tk = Tk()
                     Frontend.dashboard.Dashboard(tk,data[0],row[0][0], row[0][1], row[0][2])
-                    # Frontend.profile.Profile(tk, data[0],row[0][0], row[0][1], row[0][2])
+
 
 
 
