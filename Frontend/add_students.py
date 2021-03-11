@@ -26,8 +26,8 @@ class Add:
 
         global icon
         icon = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\back2.png")
-        rec_icon = Label(self.root, image=icon)
-        rec_icon.place(x=25, y=15)
+        self.rec_icon = Label(self.root, image=icon)
+        self.rec_icon.place(x=25, y=15)
 
         btn_add = Button(self.root, image=icon, command=self.btn_record)
         btn_add.place(x=25, y=15)
@@ -148,7 +148,13 @@ class Add:
         self.rec = Frontend.records.Record(self.root, user_id=self.user_id, username=None, hostelname=None, contact=None, address=None)
 
         self.rec.get_all_records()
-        self.clear_btn()
+        self.clear_all()
+
+    def clear_all(self):
+        self.fr1.destroy()
+        self.fr2.destroy()
+        self.fr3.destroy()
+        self.rec_icon.destroy()
 
 
     def clear_btn(self):

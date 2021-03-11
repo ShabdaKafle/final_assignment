@@ -133,7 +133,7 @@ class Billing:
         query = "select * from bill_data where bill_number=%s"
         values = (bill_number,)
         rows = self.db.select(query, values)
-        print(rows)
+
         data = []
 
         if len(rows) != 0:
@@ -144,7 +144,7 @@ class Billing:
                 data.append(row[3])
                 data.append(row[4])
                 data.append(row[5])
-                print(data)
+
 
                 Label(self.frame1, text="Hostel Bill", font=("times new roman", 20, "bold"), bg="white", fg="steelblue").place(x=120, y=5)
 
@@ -165,6 +165,8 @@ class Billing:
 
                 Label(self.frame1, text="Total fees:", font=("times new roman", 15),bg="white", fg="steelblue").place(x=160, y=440)
                 Label(self.frame1, text=data[5], font=("times new roman", 15), bg="white", fg="steelblue").place(x=260, y=440)
+
+        self.clear_btn()
 
         
 

@@ -20,14 +20,14 @@ class Update:
         self.root.config(bg="purple")
         self.index = index
         self.db= Backend.dbconnection.DBConnect()
-        print("index", self.index)
+
         self.data = self.db.select("select * from student_data where student_id={}".format(self.index))
-        print("data recorded", self.data[0])
+
 
         global icon
         icon = PhotoImage(file=r"C:\Users\ACER\Desktop\New folder\back2.png")
-        rec_icon = Label(self.root, image=icon)
-        rec_icon.place(x=25, y=15)
+        self.rec_icon = Label(self.root, image=icon)
+        self.rec_icon.place(x=25, y=15)
 
         btn_add = Button(self.root, image=icon, command=self.btn_record)
         btn_add.place(x=25, y=15)
@@ -163,13 +163,13 @@ class Update:
 
         u = model.student.Student(name, address, contact, profession, parents_name, parents_number, local_guardain, local_guardain_number, \
                                   room_number, room_type, room_partner1, room_partner2, room_partner3, total_fee)
-        print("second index", self.index)
 
-        query = "update student_data set name='{}', address='{}', contact='{}', profession='{}',parents_name='{}',parents_number='{}', local_guardain='{}', local_guardain_number='{}', room_number='{}',\
-        room_type='{}', 1st_room_partner='{}',2nd_room_partner='{}', 3rd_room_partner='{}', room_fee='{}' where student_id = {}"\
-            .format(u.get_name(), u.get_address(), u.get_contact(),u.get_profession(),u.get_parents_name(),\
+
+        query = "update student_data set name='{}', address='{}', contact='{}', profession='{}',parents_name='{}',parents_number='{}', local_guardain='{}',\
+         local_guardain_number='{}', room_number='{}', room_type='{}', 1st_room_partner='{}',2nd_room_partner='{}', 3rd_room_partner='{}', room_fee='{}'\
+          where student_id = {}".format(u.get_name(), u.get_address(), u.get_contact(),u.get_profession(),u.get_parents_name(),\
                     u.get_parents_number(),u.get_local_guardain(), u.get_number(), u.get_room_number(), \
-                 u.get_room_type(), u.get_room_partners(), u.get_room_partner(), u.get_room_partner1(), u.get_fee(), self.index)
+                    u.get_room_type(), u.get_room_partners(), u.get_room_partner(), u.get_room_partner1(), u.get_fee(), self.index)
 
 
         self.db.cur.execute(query)
@@ -177,11 +177,15 @@ class Update:
 
         messagebox.showinfo('Success', 'Data updated sucessfully!')
 
-
         self.rec = Frontend.records.Record(self.root, user_id=self.user_id, username=None, hostelname=None, contact=None, address=None)
         self.rec.get_all_records()
+        self.clear_all()
 
-        self.clear_btn()
+    def clear_all(self):
+        self.fr1.destroy()
+        self.fr2.destroy()
+        self.fr3.destroy()
+        self.rec_icon.destroy()
 
     def clear_btn(self):
         self.nam.delete(0, END)

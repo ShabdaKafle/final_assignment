@@ -10,7 +10,7 @@ import Frontend.welcomepage
 class Dashboard:
     def __init__(self,root,user_id= None, username=None,hostelname=None, address=None, contact=None):
         self.root=root
-        print("user_id from dashboard", user_id)
+
         self.user_id = user_id
         self.username=username
         self.hostelname=hostelname

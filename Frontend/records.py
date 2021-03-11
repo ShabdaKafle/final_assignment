@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import  messagebox
 import Frontend.add_students
 import Frontend.dashboard
 import Frontend.profile
@@ -131,12 +132,12 @@ class Record:
 
         records = self.get_all_records()
 
-        print(records)
+
 
     def get_all_records(self):
         query= "select * from student_data where user_id={}".format(self.user_id)
         rows = self.db.select(query)
-        print('rows information', rows)
+
         if len(rows) != 0:
             self.student_record.delete(*self.student_record.get_children())
             for row in rows:
@@ -148,6 +149,10 @@ class Record:
         Frontend.add_students.Add(tk, self.user_id, self.username, self.hostelname, self.address, self.contact)
 
     def update_btn(self):
+        if(self.selected_index < 0):
+            messagebox.showerror("Error", "Please select the record to update")
+            return
+
         self.root.destroy()
         tk = Tk()
         Frontend.update_students.Update(tk, self.user_id,self.username, self.hostelname, self.address, self.contact, self.selected_index)
@@ -210,7 +215,7 @@ class Record:
             for j in range(n - i - 1):
                 if array[j][1] > array[j + 1][1]:
                     array[j], array[j + 1] = array[j + 1], array[j]
-        return  array
+        return array
 
 # bc = Tk()
 # Record(bc)

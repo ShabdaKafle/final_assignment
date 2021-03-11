@@ -70,17 +70,17 @@ class Login_Page:
                 for row in rows:
                     data.append(row[1])
                     data.append(row[5])
-                print(data)
+
                 if uname == data[0] and passw == data[1]:
                     self.btn_reset_click()
                     messagebox.showinfo('Success', 'Congratulations!! login successful')
                     query="select user_id, hostelname, address, contact from user_data where username=%s"
                     values=(data[0],)
                     row=self.db.select(query,values)
-                    print(row)
+
                     self.root.destroy()
                     tk = Tk()
-                    print("user_id",row[0][0])
+
                     Frontend.dashboard.Dashboard(tk,row[0][0],data[0], row[0][1], row[0][2], row[0][3])
 
 
