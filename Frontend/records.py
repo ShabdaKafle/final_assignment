@@ -35,7 +35,7 @@ class Record:
 
 
         btn_sort = Button(self.root, text="Sort", font=("arial", 16, "bold"), width=7, \
-                            relief=GROOVE, bd=5, bg="steelblue", fg="white")
+                            relief=GROOVE, bd=5, bg="steelblue", fg="white", command= self.on_sort)
         btn_sort.place(x=740, y=10)
 
         btn_update = Button(self.root, text="Update", font=("arial", 16, "bold"), width=7, \
@@ -150,7 +150,7 @@ class Record:
     def update_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.update_students.Update(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.update_students.Update(tk, self.username, self.hostelname, self.address, self.contact, self.selected_index)
 
     def btn_dash(self):
         self.root.destroy()
@@ -181,6 +181,17 @@ class Record:
         curItem = self.student_record.focus()
         self.selected_index = self.student_record.item(curItem)['values'][0]
 
+    def on_sort(self):
+        query = "select * from student_data"
+        rows = self.db.select(query)
+
+        sorted_rows = self.sort_records(rows)
+        if len(sorted_rows) != 0:
+            self.student_record.delete(*self.student_record.get_children())
+            for row in sorted_rows:
+                self.student_record.insert('', 'end', values=(
+                row[0], row[1], row[2], row[3], row[4], row[6], row[8], row[9], row[10]))
+
     def delete_record(self, id):
         query = 'delete from student_data where student_id=%d'
         self.db.cur.execute(query%id)
@@ -190,6 +201,17 @@ class Record:
         self.student_record.delete(*self.student_record.get_children())
         self.get_all_records()
 
-# bc = Tk()
-# Record(bc)
-# bc.mainloop()
+    def sort_records(self, array):
+        n = len(array)
+        for i in range(n):
+            array[i] = list(array[i])
+
+        for i in range(n):
+            for j in range(n - i - 1):
+                if array[j][1] > array[j + 1][1]:
+                    array[j], array[j + 1] = array[j + 1], array[j]
+        return  array
+
+bc = Tk()
+Record(bc)
+bc.mainloop()

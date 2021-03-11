@@ -24,9 +24,10 @@ class Dashboard:
         self.F1.place(x=1, y=1, width=750, height=150)
         self.F1.config(bg="purple")
 
-
+        lb1 = Label(self.F1, text="Welcome", font=('arial', 20, 'bold'), fg='black', bg= \
+            "purple").place(x=50, y=5)
         lb1 = Label(self.F1, text = self.username,font=('arial',20,'bold'),fg='black', bg=\
-                 "purple").place(x=50, y=5)
+                 "purple").place(x=180, y=5)
         lb2 = Label(self.F1, text=self.hostelname, font=('arial', 15, 'bold'), fg='black', bg=\
                  "purple").place(x=50, y=40)
 
