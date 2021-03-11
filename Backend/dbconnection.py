@@ -6,10 +6,14 @@ class DBConnect:
         self.cur = self.con.cursor()
 
     def insert(self, query, values):
+        if type(query) is not str:
+            raise TypeError("plz provide string ")
         self.cur.execute(query,values)
         self.con.commit()
 
     def select(self,query, values=None):
+        # if type(query) is not str:
+        #     raise TypeError("plz provide string ")
         self.cur.execute(query, values)
         rows = self.cur.fetchall()
         return rows

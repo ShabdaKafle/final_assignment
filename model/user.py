@@ -1,5 +1,5 @@
 class User:
-    def __init__(self, uname,hname,add,cont, passw):
+    def __init__(self, uname=None,hname=None,add=None,cont=None, passw=None):
         self.__username = uname
         self.__hostelname = hname
         self.__address = add

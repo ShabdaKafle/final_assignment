@@ -1,5 +1,5 @@
 class Bill:
-    def __init__(self, num, dat, name, rtype, month, fee):
+    def __init__(self, name=None, dat=None, rtype=None, month=None, fee=None, num=None):
         self.__bill_number = num
         self.__date = dat
         self.__student_name = name
