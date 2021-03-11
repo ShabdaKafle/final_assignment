@@ -8,7 +8,8 @@ import Frontend.search_students
 import Backend.dbconnection
 import Frontend.update_students
 class Record:
-    def __init__(self, root, username=None,hostelname=None, contact=None, address=None):
+    def __init__(self, root, user_id=None, username=None,hostelname=None, contact=None, address=None):
+        self.user_id = user_id
         self.db = Backend.dbconnection.DBConnect()
         self.root = root
         self.root.title("records")
@@ -133,9 +134,8 @@ class Record:
         print(records)
 
     def get_all_records(self):
-        query= "select * from student_data"
-        values = None
-        rows = self.db.select(query,values)
+        query= "select * from student_data where user_id={}".format(self.user_id)
+        rows = self.db.select(query)
         print('rows information', rows)
         if len(rows) != 0:
             self.student_record.delete(*self.student_record.get_children())
@@ -145,32 +145,32 @@ class Record:
     def add_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.add_students.Add(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.add_students.Add(tk, self.user_id, self.username, self.hostelname, self.address, self.contact)
 
     def update_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.update_students.Update(tk, self.username, self.hostelname, self.address, self.contact, self.selected_index)
+        Frontend.update_students.Update(tk, self.user_id,self.username, self.hostelname, self.address, self.contact, self.selected_index)
 
     def btn_dash(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.dashboard.Dashboard(tk,self.username,self.hostelname, self.address, self.contact)
+        Frontend.dashboard.Dashboard(tk,self.user_id,self.username,self.hostelname, self.address, self.contact)
 
     def prof_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.profile.Profile(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.profile.Profile(tk,self.user_id, self.username, self.hostelname, self.address, self.contact)
 
     def btn_bill(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.billing.Billing(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.billing.Billing(tk, self.user_id, self.username, self.hostelname, self.address, self.contact)
 
     def btn_search(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.search_students.Search(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.search_students.Search(tk, self.user_id, self.username, self.hostelname, self.address, self.contact)
 
     def btn_delete(self):
         if(self.selected_index > 0):
@@ -182,7 +182,7 @@ class Record:
         self.selected_index = self.student_record.item(curItem)['values'][0]
 
     def on_sort(self):
-        query = "select * from student_data"
+        query = "select * from student_data where user_id={}".format(self.user_id)
         rows = self.db.select(query)
 
         sorted_rows = self.sort_records(rows)
@@ -212,6 +212,6 @@ class Record:
                     array[j], array[j + 1] = array[j + 1], array[j]
         return  array
 
-bc = Tk()
-Record(bc)
-bc.mainloop()
+# bc = Tk()
+# Record(bc)
+# bc.mainloop()

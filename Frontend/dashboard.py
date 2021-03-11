@@ -8,8 +8,10 @@ import Frontend.welcomepage
 
 
 class Dashboard:
-    def __init__(self,root,username=None,hostelname=None, address=None, contact=None):
+    def __init__(self,root,user_id= None, username=None,hostelname=None, address=None, contact=None):
         self.root=root
+        print("user_id from dashboard", user_id)
+        self.user_id = user_id
         self.username=username
         self.hostelname=hostelname
         self.address = address
@@ -73,17 +75,17 @@ class Dashboard:
     def rec_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.records.Record(tk, self.user_id, self.username, self.hostelname, self.address, self.contact)
 
     def prof_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.profile.Profile(tk,self.username, self.hostelname, self.address, self.contact)
+        Frontend.profile.Profile(tk, self.user_id, self.username, self.hostelname, self.address, self.contact)
 
     def btn_bill(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.billing.Billing(tk,self.username, self.hostelname, self.address, self.contact)
+        Frontend.billing.Billing(tk,self.user_id,self.username, self.hostelname, self.address, self.contact)
 
 
     def logout_btn(self):

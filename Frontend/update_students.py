@@ -8,8 +8,9 @@ import Backend.dbconnection
 import Frontend.records
 
 class Update:
-    def __init__(self, root, username=None, hostelname=None, contact=None, address=None, index=None):
+    def __init__(self, root, user_id=None,username=None, hostelname=None, contact=None, address=None, index=None):
         self.root = root
+        self.user_id=user_id
         self.username = username
         self.hostelname = hostelname
         self.contact = contact
@@ -176,8 +177,10 @@ class Update:
 
         messagebox.showinfo('Success', 'Data updated sucessfully!')
 
-        self.rec = Frontend.records.Record(self.root, username=None, hostelname=None, contact=None, address=None)
+
+        self.rec = Frontend.records.Record(self.root, user_id=self.user_id, username=None, hostelname=None, contact=None, address=None)
         self.rec.get_all_records()
+
         self.clear_btn()
 
     def clear_btn(self):
@@ -212,7 +215,7 @@ class Update:
     def btn_record(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.records.Record(tk, self.user_id,self.username, self.hostelname, self.address, self.contact)
 
 # n = Tk()
 # Update(n)

@@ -8,8 +8,9 @@ import Backend.dbconnection
 import Frontend.records
 
 class Add:
-    def __init__(self, root, username=None, hostelname=None, contact=None, address=None):
+    def __init__(self, root, user_id=None,username=None, hostelname=None, contact=None, address=None):
         self.root = root
+        self.user_id=user_id
         self.username = username
         self.hostelname = hostelname
         self.contact = contact
@@ -133,18 +134,19 @@ class Add:
                                   room_number, room_type, room_partner1, room_partner2, room_partner3, total_fee)
 
         query = "insert into student_data(name, address, contact, profession, parents_name, parents_number, local_guardain, local_guardain_number, \
-        room_number, room_type, 1st_room_partner, 2nd_room_partner, 3rd_room_partner, room_fee) \
-        values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        room_number, room_type, 1st_room_partner, 2nd_room_partner, 3rd_room_partner, room_fee, user_id) \
+        values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         values = (u.get_name(), u.get_address(), u.get_contact(), u.get_profession(), u.get_parents_name(), \
                   u.get_parents_number(), u.get_local_guardain(), u.get_number(),u.get_room_number(),\
-                  u.get_room_type(), u.get_room_partners(), u.get_room_partner(), u.get_room_partner1(),u.get_fee())
+                  u.get_room_type(), u.get_room_partners(), u.get_room_partner(), u.get_room_partner1(),u.get_fee(), self.user_id)
 
 
         self.db.insert(query, values)
 
         messagebox.showinfo('Success', 'Data saved sucessfully!')
 
-        self.rec = Frontend.records.Record(self.root, username=None, hostelname=None, contact=None, address=None)
+        self.rec = Frontend.records.Record(self.root, user_id=self.user_id, username=None, hostelname=None, contact=None, address=None)
+
         self.rec.get_all_records()
         self.clear_btn()
 
@@ -184,7 +186,7 @@ class Add:
     def btn_record(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.records.Record(tk, self.user_id,self.username, self.hostelname, self.address, self.contact)
 
 
 

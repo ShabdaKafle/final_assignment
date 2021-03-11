@@ -125,7 +125,7 @@ class Register_Page:
 
         messagebox.showinfo('Success', 'User Registration successful')
         self.register.destroy()
-        tk = Toplevel()
+        tk = Tk()
         Frontend.loginpage.Login_Page(tk)
 
 # a = Tk()

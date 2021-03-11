@@ -11,8 +11,9 @@ import Backend.dbconnection
 import model.bill
 
 class Billing:
-    def __init__(self, root, username=None, hostelname=None, address=None, contact=None):
+    def __init__(self, root, user_id=None, username=None, hostelname=None, address=None, contact=None):
         self.root = root
+        self.user_id = user_id
         self.root.title("billing")
         self.root.geometry('1050x600')
         self.root.config(bg="white")
@@ -122,8 +123,8 @@ class Billing:
 
         u = model.bill.Bill(bill_number, date, name, room_type, month, total_fees)
 
-        query = "insert into bill_data(bill_number, date, student_name, room_type, month_of_paying, total_fees) values(%s,%s,%s,%s,%s,%s)"
-        values = (u.get_bill_num(), u.get_date(), u.get_name(), u.get_room(), u.get_month(), u.get_fees())
+        query = "insert into bill_data(bill_number, date, student_name, room_type, month_of_paying, total_fees, user_id) values(%s,%s,%s,%s,%s,%s,%s)"
+        values = (u.get_bill_num(), u.get_date(), u.get_name(), u.get_room(), u.get_month(), u.get_fees(), self.user_id)
 
         self.db.insert(query, values)
 
@@ -188,17 +189,17 @@ class Billing:
     def btn_dash(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.dashboard.Dashboard(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.dashboard.Dashboard(tk, self.user_id, self.username, self.hostelname, self.address, self.contact)
 
     def prof_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.profile.Profile(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.profile.Profile(tk, self.user_id, self.username, self.hostelname, self.address, self.contact)
 
     def rec_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.records.Record(tk, self.user_id,self.username, self.hostelname, self.address, self.contact)
 
 
 # at = Tk()

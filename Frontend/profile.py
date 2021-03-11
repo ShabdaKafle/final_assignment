@@ -7,8 +7,9 @@ import model.user
 import Backend.dbconnection
 
 class Profile:
-    def __init__(self, root, username=None, hostelname=None, address=None, contact=None):
+    def __init__(self, root, user_id= None,username=None, hostelname=None, address=None, contact=None):
         self.root = root
+        self.user_id = user_id
         self.username = username
         self.hostelname = hostelname
         self.address = address
@@ -88,17 +89,17 @@ class Profile:
     def btn_dash(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.dashboard.Dashboard(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.dashboard.Dashboard(tk, self.user_id,self.username, self.hostelname, self.address, self.contact)
 
     def rec_btn(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.records.Record(tk, self.user_id,self.username, self.hostelname, self.address, self.contact)
 
     def btn_bill(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.billing.Billing(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.billing.Billing(tk, self.user_id,self.username, self.hostelname, self.address, self.contact)
 
 
 # ag = Tk()

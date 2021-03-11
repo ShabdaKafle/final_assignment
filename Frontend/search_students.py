@@ -6,8 +6,9 @@ import Backend.dbconnection
 
 
 class Search:
-    def __init__(self, root, username=None, hostelname=None, address=None, contact=None):
+    def __init__(self, root, user_id=None, username=None, hostelname=None, address=None, contact=None):
         self.root = root
+        self.user_id =user_id
         self.username = username
         self.hostelname = hostelname
         self.address = address
@@ -83,7 +84,7 @@ class Search:
             return
 
         option = self.selected.get()
-        query = "select * from student_data"
+        query = "select * from student_data where user_id={}".format(self.user_id)
         if option == "Id":
             index = 0
         elif option == "Name":
@@ -104,7 +105,7 @@ class Search:
     def btn_record(self):
         self.root.destroy()
         tk = Tk()
-        Frontend.records.Record(tk, self.username, self.hostelname, self.address, self.contact)
+        Frontend.records.Record(tk, self.user_id,self.username, self.hostelname, self.address, self.contact)
 
 # an = Tk()
 # Search(an)
