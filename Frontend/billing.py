@@ -123,7 +123,8 @@ class Billing:
 
         u = model.bill.Bill(bill_number, date, name, room_type, month, total_fees)
 
-        query = "insert into bill_data(bill_number, date, student_name, room_type, month_of_paying, total_fees, user_id) values(%s,%s,%s,%s,%s,%s,%s)"
+        query = "insert into bill_data(bill_number, date, student_name, room_type, month_of_paying, total_fees, ," \
+                "user_id) values(%s,%s,%s,%s,%s,%s,%s)"
         values = (u.get_bill_num(), u.get_date(), u.get_name(), u.get_room(), u.get_month(), u.get_fees(), self.user_id)
 
         self.db.insert(query, values)

@@ -76,7 +76,7 @@ class Search:
 
         self.student_record.pack(fill=BOTH, expand=1)
 
-    def serch(self):
+    def serch(self,item, index):
 
         item = self.name.get()
         if item == '':
@@ -99,7 +99,7 @@ class Search:
 
             elif not item:
                 print("User not found")
-                messagebox.showerror("Error", "Ud")
+                messagebox.showerror("Error", "Not found!")
 
 
     def btn_record(self):
