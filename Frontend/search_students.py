@@ -76,7 +76,7 @@ class Search:
 
         self.student_record.pack(fill=BOTH, expand=1)
 
-    def serch(self,item, index):
+    def serch(self):
 
         item = self.name.get()
         if item == '':

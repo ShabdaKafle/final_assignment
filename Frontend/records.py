@@ -137,6 +137,7 @@ class Record:
     def get_all_records(self):
         query= "select * from student_data where user_id={}".format(self.user_id)
         rows = self.db.select(query)
+        print(rows)
 
         if len(rows) != 0:
             self.student_record.delete(*self.student_record.get_children())

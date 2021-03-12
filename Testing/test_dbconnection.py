@@ -25,3 +25,4 @@ class Test_DBConnect(unittest.TestCase):
         query = "select * from student_data"
         row = self.db.select(query)
         self.assertIsNotNone(row)
+

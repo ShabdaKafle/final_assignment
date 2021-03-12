@@ -13,3 +13,7 @@ class DBConnect:
         self.cur.execute(query, values)
         rows = self.cur.fetchall()
         return rows
+    def selectA(self,query):
+        self.cur.execute(query)
+        rows = self.cur.fetchall()
+        return rows

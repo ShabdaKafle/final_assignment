@@ -3,22 +3,12 @@ import Frontend.records
 
 class Test_Record(unittest.TestCase):
     def setUp(self):
-        self.lst = [('shabda', 'Bcd'), ("sarina", "Def"), ('srishti', 'Abc')]
-        self.s = Frontend.records.Record(self)
-
-
-
+        self.sort = Frontend.records.Record
 
     def test_sort_records(self):
+        list = [("shabda", "kafle", "123", "abc"), ("john", "cena", "234", "def"), ("fara", "den", "567", "red"), ("rose", "willaim", "678", "yxz")]
+        expectedresult = [["john", "cena", "234", "def"],["fara", "den", "567", "red"],["shabda", "kafle", "123", "abc"],["rose", "willaim", "678", "yxz"]]
+        sctaulresult = self.sort.sort_records(self.sort.sort_records,list)
+        self.assertEqual(expectedresult, sctaulresult)
 
-        expected_result = [("sarina", "Def"), ('shabda', 'Bcd'), ('srishti', 'Abc')]
 
-        actual_result = self.s.sort_records(self.lst, 0)
-
-        self.assertEqual(expected_result, actual_result)
-
-        expected_result = [('srishti', 'Abc'), ('shabda', 'Bcd'), ("sarina", "Def")]
-
-        actual_result = self.s.sort_records(self.lst, 1)
-
-        self.assertEqual(expected_result, actual_result)
